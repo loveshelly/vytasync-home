@@ -45,18 +45,21 @@ export async function onRequestPost({ request, env }) {
       })
     });
 
+    // ... 前面的 fetch 代码 ...
+
     const origin = new URL(request.url).origin;
 
     if (response.ok) {
-      // 成功：跳回首页并带上参数，触发 GA4 脚本
+      // 成功：跳回首页并带上 success 参数
       return Response.redirect(`${origin}/?subscribe=success&from=${location}`, 303);
     } else {
-      // 失败：记录错误并跳回
-      const errorText = await response.text();
-      console.error('Klaviyo Error:', errorText);
+      // 失败：即便失败也要跳回首页，但带上 error 参数，防止页面卡死
+      const errorData = await response.text();
+      console.error("Klaviyo API Error:", errorData);
       return Response.redirect(`${origin}/?subscribe=error`, 303);
     }
   } catch (err) {
-    return new Response(err.message, { status: 500 });
+    // 捕获脚本崩溃错误并跳回
+    return Response.redirect(`${new URL(request.url).origin}/?subscribe=server_error`, 303);
   }
 }
