@@ -21,6 +21,7 @@ export async function onRequestPost({ request, env }) {
         'revision': '2024-02-15'
       },
       // 替换 subscribe.js 中 fetch 的 body 部分
+// 替换 subscribe.js 中 fetch 的 body 部分
 body: JSON.stringify({
   data: {
     type: 'profile-subscription-bulk-create-job',
