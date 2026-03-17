@@ -51,10 +51,13 @@ body: JSON.stringify({
     const origin = new URL(request.url).origin;
 
     if (response.ok) {
+      // 成功：跳回首页并带上 success 参数
       return Response.redirect(`${origin}/?subscribe=success&from=${location}`, 303);
     } else {
-      // 获取 Klaviyo 返回的具体错误代码（如 401 Unauthorized 或 404 Not Found）
-      const errorText = await response.text();
-      // 将具体的错误信息带在 URL 上
-      return Response.redirect(`${origin}/?subscribe=error&debug_info=${encodeURIComponent(errorText)}`, 303);
+      // --- 关键修改开始 ---
+      // 获取 Klaviyo 返回的具体错误原因（比如：Invalid API Key, List not found 等）
+      const errorText = await response.text(); 
+      // 把错误详情带在地址栏，这样我们一眼就能看出哪里错了
+      return Response.redirect(`${origin}/?subscribe=error&debug_msg=${encodeURIComponent(errorText)}`, 303);
+      // --- 关键修改结束 ---
     }
