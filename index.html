@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '2347653875697492'); 
+fbq('track', 'PageView');fbq('track', 'ViewContent');
+</script>
+<noscript>
+ <img height="1" width="1" 
+src="https://www.facebook.com/tr?id=2347653875697492&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-S6C2L0RWEG"></script>
 <script>
@@ -1391,7 +1410,7 @@
 <!-- BOTTOM STICKY BAR (shows on scroll) -->
 <div id="sticky-bar">
   <span class="sticky-ks-badge"><span class="sticky-ks-dot"></span>Launching on Kickstarter &middot; May</span>
-  <a href="#" class="sticky-cta open-modal">Lock In 40% Off</a>
+  <a href="#" class="sticky-cta open-modal"onclick="fbq('track', 'AddToCart');>Lock In 40% Off</a>
 </div>
 
 <!-- EMAIL MODAL -->
@@ -1810,8 +1829,8 @@
   <div class="footer-links">
     <a href="#">Privacy</a>
     <a href="#">Terms</a>
-    <a href="#">Contact</a>
-    <a href="https://www.kickstarter.com" target="_blank">Kickstarter</a>
+    <a href="contact@vytasync.com"onclick="fbq('track', 'Contact');>Contact</a><button onclick="fbq('track', 'Contact');">Contact</button>
+    <a href="https://www.kickstarter.com" onclick=fbq('track', 'Purchase', {value: 0.00, currency: 'USD'});target="_blank">Kickstarter</a>
   </div>
   <div class="footer-copy">© 2026 Vytasync. All rights reserved.</div>
 </footer>
@@ -2390,7 +2409,7 @@
   window.addEventListener('load', function() {
     // 检查 URL 是否包含从 subscribe.js 返回的成功信号
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('subscribe') === 'success') {
+    if (urlParams.get('subscribe') === 'success') {fbq('track', 'CompleteRegistration');}
       const fromLocation = urlParams.get('from') || 'general';
       
       // 1. 向 GA4 发送转化事件
