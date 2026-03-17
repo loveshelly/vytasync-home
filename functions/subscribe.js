@@ -20,28 +20,39 @@ export async function onRequestPost({ request, env }) {
         'Content-Type': 'application/json',
         'revision': '2024-02-15'
       },
-      body: JSON.stringify({
-        data: {
-          type: 'profile-subscription-bulk-create-job',
+      // 替换 subscribe.js 中 fetch 的 body 部分
+body: JSON.stringify({
+  data: {
+    type: 'profile-subscription-bulk-create-job',
+    attributes: {
+      profiles: {
+        data: [{
+          type: 'profile',
           attributes: {
-            profiles: {
-              data: [{
-                type: 'profile',
-                attributes: {
-                  email: email,
-                  properties: { "Signup_Source": location }
+            email: email,
+            properties: { "Signup_Source": location },
+            // 明确添加订阅信息，解决 400 格式错误
+            subscriptions: {
+              email: {
+                marketing: {
+                  consent: "SUBSCRIBED"
                 }
-              }]
-            }
-          },
-          relationships: {
-            list: {
-              data: { type: 'list', id: 'Us6BtR' } // 这里直接写死你的 List ID
+              }
             }
           }
+        }]
+      }
+    },
+    relationships: {
+      list: {
+        data: {
+          type: 'list',
+          id: KLAVIYO_LIST_ID
         }
-      })
-    });
+      }
+    }
+  }
+})
 
     // 3. 无论成功失败，必须重定向回首页
     if (response.ok) {
