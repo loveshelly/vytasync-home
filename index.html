@@ -2379,6 +2379,29 @@
   document.head.appendChild(style);
 })();
 </script>
-
+<script>
+  window.addEventListener('load', function() {
+    // 检查 URL 是否包含从 subscribe.js 返回的成功信号
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('subscribe') === 'success') {
+      const fromLocation = urlParams.get('from') || 'general';
+      
+      // 1. 向 GA4 发送转化事件
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          'signup_location': fromLocation,
+          'event_label': 'Klaviyo Subscription'
+        });
+        console.log('GA4 Lead Event Sent from: ' + fromLocation);
+      }
+      
+      // 2. 弹出成功提示
+      alert('Thank you for joining Vytasync!');
+      
+      // 3. 清理 URL 参数，防止刷新页面导致重复统计
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  });
+</script>
 </body>
 </html>
