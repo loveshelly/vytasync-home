@@ -1,63 +1,57 @@
 export async function onRequestPost({ request, env }) {
+  const origin = new URL(request.url).origin;
+  
   try {
     const data = await request.formData();
     const email = data.get('email');
     const location = data.get('location') || 'unknown';
     
-    // 你的 List ID
-    const KLAVIYO_LIST_ID = 'Us6BtR'; 
+    // 1. 检查环境变量 (防止由于变量缺失导致崩溃)
+    if (!env.KLAVIYO_PRIVATE_API_KEY) {
+      return Response.redirect(`${origin}/?subscribe=error&msg=no_api_key_in_cf`, 303);
+    }
 
-    if (!email) return new Response('Email required', { status: 400 });
-
-    // 修复后的 Klaviyo 订阅接口 (API Revision: 2024-02-15)
+    // 2. 发送请求给 Klaviyo
     const response = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
       method: 'POST',
       headers: {
-        // 请确保 Cloudflare 控制台里的变量名是 KLAVIYO_PRIVATE_API_KEY
         'Authorization': `Klaviyo-API-Key ${env.KLAVIYO_PRIVATE_API_KEY}`,
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'revision': '2024-02-15'
       },
-      // 替换 subscribe.js 中 fetch 的 body 部分
-body: JSON.stringify({
-  data: {
-    type: 'profile-subscription-bulk-create-job',
-    attributes: {
-      profiles: {
-        data: [{
-          type: 'profile',
+      body: JSON.stringify({
+        data: {
+          type: 'profile-subscription-bulk-create-job',
           attributes: {
-            email: email,
-            properties: { "Signup_Source": location },
-            // 明确告知 Klaviyo 这是一个订阅动作
-            subscriptions: {
-              email: { marketing: { consent: "SUBSCRIBED" } }
+            profiles: {
+              data: [{
+                type: 'profile',
+                attributes: {
+                  email: email,
+                  properties: { "Signup_Source": location }
+                }
+              }]
+            }
+          },
+          relationships: {
+            list: {
+              data: { type: 'list', id: 'Us6BtR' } // 这里直接写死你的 List ID
             }
           }
-        }]
-      }
-    },
-    relationships: {
-      list: {
-        data: { type: 'list', id: KLAVIYO_LIST_ID }
-      }
-    }
-  }
-})
+        }
+      })
+    });
 
-    // ... 前面的 fetch 代码 ...
-
-    const origin = new URL(request.url).origin;
-
+    // 3. 无论成功失败，必须重定向回首页
     if (response.ok) {
-      // 成功：跳回首页并带上 success 参数
       return Response.redirect(`${origin}/?subscribe=success&from=${location}`, 303);
     } else {
-      // --- 关键修改开始 ---
-      // 获取 Klaviyo 返回的具体错误原因（比如：Invalid API Key, List not found 等）
-      const errorText = await response.text(); 
-      // 把错误详情带在地址栏，这样我们一眼就能看出哪里错了
-      return Response.redirect(`${origin}/?subscribe=error&debug_msg=${encodeURIComponent(errorText)}`, 303);
-      // --- 关键修改结束 ---
+      const errText = await response.text();
+      // 这里我们在 URL 里加上 ERROR_CONFIRMED 标记
+      return Response.redirect(`${origin}/?subscribe=error&status=${response.status}&details=ERROR_CONFIRMED`, 303);
     }
+  } catch (err) {
+    return Response.redirect(`${origin}/?subscribe=error&msg=catch_crash`, 303);
+  }
+}
