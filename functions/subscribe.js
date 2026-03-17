@@ -19,47 +19,42 @@ export async function onRequestPost({ request, env }) {
         'Content-Type': 'application/json',
         'revision': '2024-02-15'
       },
-      body: JSON.stringify({
-        data: {
-          type: 'profile-subscription-bulk-create-job',
+      // 替换 subscribe.js 中 fetch 的 body 部分
+body: JSON.stringify({
+  data: {
+    type: 'profile-subscription-bulk-create-job',
+    attributes: {
+      profiles: {
+        data: [{
+          type: 'profile',
           attributes: {
-            profiles: {
-              data: [{
-                type: 'profile',
-                attributes: {
-                  email: email,
-                  properties: { "Signup_Source": location }
-                }
-              }]
-            }
-          },
-          relationships: {
-            list: {
-              data: {
-                type: 'list',
-                id: KLAVIYO_LIST_ID
-              }
+            email: email,
+            properties: { "Signup_Source": location },
+            // 明确告知 Klaviyo 这是一个订阅动作
+            subscriptions: {
+              email: { marketing: { consent: "SUBSCRIBED" } }
             }
           }
-        }
-      })
-    });
+        }]
+      }
+    },
+    relationships: {
+      list: {
+        data: { type: 'list', id: KLAVIYO_LIST_ID }
+      }
+    }
+  }
+})
 
     // ... 前面的 fetch 代码 ...
 
     const origin = new URL(request.url).origin;
 
     if (response.ok) {
-      // 成功：跳回首页并带上 success 参数
       return Response.redirect(`${origin}/?subscribe=success&from=${location}`, 303);
     } else {
-      // 失败：即便失败也要跳回首页，但带上 error 参数，防止页面卡死
-      const errorData = await response.text();
-      console.error("Klaviyo API Error:", errorData);
-      return Response.redirect(`${origin}/?subscribe=error`, 303);
+      // 获取 Klaviyo 返回的具体错误代码（如 401 Unauthorized 或 404 Not Found）
+      const errorText = await response.text();
+      // 将具体的错误信息带在 URL 上
+      return Response.redirect(`${origin}/?subscribe=error&debug_info=${encodeURIComponent(errorText)}`, 303);
     }
-  } catch (err) {
-    // 捕获脚本崩溃错误并跳回
-    return Response.redirect(`${new URL(request.url).origin}/?subscribe=server_error`, 303);
-  }
-}
