@@ -1764,13 +1764,20 @@ src="https://www.facebook.com/tr?id=2347653875697492&ev=PageView
   <div class="capture-text reveal">
     <h2 class="section-h2">Wake up to a<br><em>lighter morning.</em></h2>
     <p class="section-p">Join now to lock in early-bird Kickstarter pricing. Limited spots available — early backers get exclusive perks and ship first.</p>
-    <form action="/subscribe" method="POST" class="capture-form-inline">
-  <input type="hidden" name="location" value="footer">
-  
-  <input type="email" name="email" class="capture-input" id="capture-email" placeholder="your@email.com" required>
-  
-  <button type="submit" class="btn-primary" id="capture-submit">Unlock My Reward</button>
-</form>
+    <div class="problem-cta" style="margin-top: 2.5rem; width: 100%; max-width: 500px; margin-left: auto; margin-right: auto;">
+  <form action="/subscribe" method="POST" class="capture-form-inline" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+    
+    <input type="hidden" name="location" value="middle_problem">
+    
+    <input type="email" name="email" class="capture-input" placeholder="your@email.com" required 
+           style="flex: 1; min-width: 250px; padding: 14px 20px; border-radius: 99px; border: 1px solid rgba(26,20,16,0.15); font-family: var(--sans);">
+    
+    <button type="submit" class="btn-primary" 
+            style="padding: 14px 30px; border-radius: 99px; cursor: pointer; border: none; background: var(--ink); color: #fff; font-weight: 500;">
+      Unlock My Reward
+    </button>
+  </form>
+</div>
     <p class="capture-microcopy">No spam. Unsubscribe anytime. · 2,47 people already on the list.</p>
   </div>
   <div class="capture-visual reveal">
