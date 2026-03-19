@@ -2409,28 +2409,60 @@ src="https://www.facebook.com/tr?id=2347653875697492&ev=PageView
 })();
 </script>
   
-window.addEventListener('load', function() {
-    // 检查 URL 是否包含从 subscribe.js 返回的成功信号
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('subscribe') === 'success') {fbq('track', 'CompleteRegistration');
-      const fromLocation = urlParams.get('from') || 'general';
-      
-      // 1. 向 GA4 发送转化事件
-      if (typeof gtag === 'function') {
-        gtag('event', 'generate_lead', {
-          'signup_location': fromLocation,
-          'event_label': 'Klaviyo Subscription'
-        });
-        console.log('GA4 Lead Event Sent from: ' + fromLocation);
-      }
-      
-      // 2. 弹出成功提示
-      alert('Thank you for joining Vytasync!');
-      
-      // 3. 清理 URL 参数，防止刷新页面导致重复统计
-      window.history.replaceState({}, document.title, window.location.pathname);
+<script>
+// 針對 Footer 這個板塊的點擊處理
+document.getElementById('footer-submit-btn').addEventListener('click', function() {
+    const email = document.getElementById('footer-email').value;
+    const location = document.getElementById('footer-location').value;
+    const btn = this;
+
+    if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
     }
-  });
+
+    btn.disabled = true;
+    btn.innerText = 'Sending...';
+
+    // 1. 發送數據到後端 (確保 Klaviyo 收集)
+    fetch('/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `email=${encodeURIComponent(email)}&location=${encodeURIComponent(location)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // 2. 觸發 GA4 轉化 (這裡模仿您原有的 GA4 代碼格式)
+            if (typeof gtag === 'function') {
+                gtag('event', 'generate_lead', {
+                    'signup_location': location,
+                    'event_label': 'Klaviyo Subscription'
+                });
+                console.log('GA4 Lead Event Sent from: ' + location);
+            }
+
+            // 3. 觸發 FB Pixel (如果您有使用)
+            if (typeof fbq === 'function') fbq('track', 'CompleteRegistration');
+
+            // 4. 顯示提示 (與您原本代碼中的提示語一致)
+            alert('Thank you for joining Vytasync!');
+            
+            // 清空輸入框
+            document.getElementById('footer-email').value = '';
+        } else {
+            alert('Error: ' + (data.message || 'Subscription failed.'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Service error, please try again later.');
+    })
+    .finally(() => {
+        btn.disabled = false;
+        btn.innerText = 'Unlock My Reward';
+    });
+});
 </script>
 </body>
 </html>
