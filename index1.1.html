@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vytasync AI Pillow — Kickstarter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  background:#fff;color:#1A1A1A;
+  font-size:15px;line-height:1.65;
+  max-width:680px;margin:0 auto;
+}
+:root{
+  --ink:#1A1A1A;--ink2:#4A4A4A;--ink3:#8A8A8A;
+  --teal:#1565C0;--teal2:#1976D2;--teal-l:rgba(21,101,192,.08);
+  --panel:#F5F5F5;--panel2:#EFEFEF;
+  --border:rgba(0,0,0,.09);--border2:rgba(0,0,0,.16);
+  --grn:#1E8A52;--amber:#B07820;--red:#C03030;
+  --g:'Space Grotesk',system-ui,sans-serif;
+  --m:'Space Mono',monospace;
+}
+img,video{display:block;width:100%}
+video{background:#111}
+
+/* SECTION LABEL */
+.slb{background:#F0F0F0;padding:10px 24px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.slb-n{font-family:var(--m);font-size:10px;color:var(--teal);border:1px solid var(--teal2);padding:1px 8px;border-radius:20px;letter-spacing:.06em}
+.slb>span{font-family:var(--m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
+
+/* SPACERS */
+.s8{height:8px}.s16{height:16px}.s24{height:24px}.s32{height:32px}.s40{height:40px}.s56{height:56px}
+
+/* DIVIDERS */
+.dv{height:1px;background:var(--border)}
+.dvm{height:1px;background:var(--border);margin:0 24px}
+
+/* TEXT BLOCK */
+.tb{padding:0 24px}
+.tb.c{text-align:center}
+
+.ey{font-family:var(--m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.ey::before{content:'';display:inline-block;width:16px;height:1px;background:var(--teal);flex-shrink:0}
+.ey.c{justify-content:center}
+.ey.c::before{display:none}
+
+h2.sh{font-family:var(--g);font-size:clamp(1.7rem,5.5vw,2.4rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:12px}
+h2.sh span{color:var(--teal)}
+h2.sh.sm{font-size:clamp(1.3rem,4vw,1.8rem)}
+
+h3.fh{font-family:var(--g);font-size:clamp(1.4rem,4vw,1.9rem);font-weight:700;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px;line-height:1.15}
+h3.fh span{color:var(--teal)}
+
+.bc{font-size:14px;color:var(--ink2);line-height:1.8;margin-bottom:12px}
+.bc strong{color:var(--ink);font-weight:500}
+
+.cap{font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.06em;text-align:center;padding:7px 20px 0;line-height:1.5;text-transform:uppercase}
+
+/* FEATURE BADGE */
+.feat-badge{display:inline-flex;align-items:center;gap:6px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);padding:5px 14px;border-radius:20px;margin-bottom:14px}
+.feat-badge .fn{font-family:var(--m);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.feat-badge .fi{width:6px;height:6px;border-radius:50%;background:var(--teal)}
+
+/* VIDEO */
+.vid{position:relative;background:#111;width:100%}
+.vid video{width:100%;display:block}
+.vid-tag{position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,.65);border:1px solid rgba(21,101,192,.35);color:var(--teal);font-family:var(--m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:20px}
+
+/* GIF */
+.gif-block{width:100%;background:#f5f5f5}
+.gif-block img{width:100%;display:block}
+
+/* STATS STRIP */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);background:#F0F0F0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{padding:22px 10px;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.snum{font-family:var(--g);font-size:1.9rem;font-weight:700;color:var(--teal);line-height:1;margin-bottom:4px;letter-spacing:-.02em}
+.snum sup{font-size:.9rem}
+.slbl{font-family:var(--m);font-size:9px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;line-height:1.4}
+
+/* FEATURE SECTION - full width dark accent bar */
+.feat-section{border-top:3px solid var(--teal);background:#fff}
+.feat-num-bar{background:var(--teal);padding:8px 24px;display:flex;align-items:center;gap:12px}
+.feat-num-bar .fn-big{font-family:var(--g);font-size:1.8rem;font-weight:700;color:#fff;line-height:1;letter-spacing:-.03em}
+.feat-num-bar .fn-title{font-family:var(--m);font-size:11px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.12em;text-transform:uppercase}
+.feat-num-bar .fn-sub{font-family:var(--m);font-size:9px;color:rgba(255,255,255,.55);letter-spacing:.08em;text-transform:uppercase;margin-top:1px}
+
+/* FEATURE SPLIT - text + visual side by side */
+.feat-split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.feat-split-text{background:#fff;padding:24px 20px}
+.feat-split-visual{background:var(--panel);position:relative;overflow:hidden}
+.feat-split-visual video{width:100%;height:100%;object-fit:cover}
+.feat-split-visual img{width:100%;height:100%;object-fit:cover}
+
+/* FEATURE DETAIL CARDS */
+.feat-detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.fdc{background:var(--panel);padding:20px 16px}
+.fdc-icon{width:36px;height:36px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.fdc-icon svg{width:18px;height:18px;stroke:var(--teal);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.fdc h4{font-family:var(--g);font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.fdc p{font-size:11px;color:var(--ink3);line-height:1.6}
+.fdc .fdc-spec{font-family:var(--m);font-size:10px;color:var(--teal);margin-top:6px;font-weight:700}
+
+/* BEFORE/AFTER comparison */
+.ba-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.ba-panel{position:relative}
+.ba-panel video{width:100%;display:block}
+.ba-label{position:absolute;top:10px;left:10px;font-family:var(--m);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px}
+.ba-label.bad{background:rgba(192,48,48,.85);color:#fff}
+.ba-label.good{background:rgba(21,101,192,.85);color:#fff}
+.ba-caption{background:var(--panel);padding:10px 14px;font-size:11px;color:var(--ink2);line-height:1.5;border-top:1px solid var(--border)}
+.ba-caption strong{font-weight:600;color:var(--ink)}
+
+/* PROCESS STEPS */
+.psteps{}
+.pstep{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.pstep:last-child{border-bottom:none}
+.psn{width:28px;height:28px;background:var(--teal2);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--m);font-size:11px;font-weight:700;flex-shrink:0}
+.pstep h4{font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.pstep p{font-size:12px;color:var(--ink3);line-height:1.6}
+
+/* CHECKLIST */
+.cl{list-style:none;display:flex;flex-direction:column;gap:8px}
+.cl li{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--ink2);line-height:1.55}
+.ck{width:16px;height:16px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ck svg{width:8px;height:8px;stroke:var(--teal);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* COMPARISON TABLE */
+.ctbl{width:100%;border-collapse:collapse;font-size:12px}
+.ctbl thead th{padding:10px 12px;text-align:left;font-family:var(--m);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--border);background:#F0F0F0}
+.ctbl thead th.hc{background:var(--teal2);color:#fff;text-align:center}
+.ctbl tbody tr{border-bottom:1px solid var(--border)}
+.ctbl tbody tr:last-child{border-bottom:none}
+.ctbl tbody td{padding:10px 12px;color:var(--ink2);vertical-align:middle}
+.ctbl tbody td.fc{font-weight:500;color:var(--ink)}
+.ctbl tbody td.hc{background:rgba(21,101,192,.05);text-align:center;font-weight:600;color:var(--teal)}
+.ckv{color:var(--grn)}.cxv{color:var(--red)}.cpv{color:var(--amber);font-size:11px}
+
+/* HIGHLIGHT BANNER */
+.banner{background:#F5F5F5;padding:36px 24px;text-align:center;border-top:2px solid var(--teal);border-bottom:1px solid var(--border)}
+
+/* TESTIMONIALS */
+.tbig{background:var(--panel);padding:28px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.tq{font-family:var(--g);font-size:clamp(1rem,3.5vw,1.25rem);font-weight:500;color:var(--ink);line-height:1.55;margin-bottom:18px;letter-spacing:-.01em}
+.tq::before{content:'"';color:var(--teal);margin-right:2px}
+.tq::after{content:'"';color:var(--teal);margin-left:2px}
+.tpers{display:flex;align-items:center;gap:10px}
+.tav{width:32px;height:32px;border-radius:50%;background:var(--panel2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--m);font-size:10px;color:var(--ink3);flex-shrink:0}
+.tnm{font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);line-height:1.2}
+.trl{font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.04em}
+.tg2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.tc{background:var(--panel);padding:18px 16px}
+.tstrs{display:flex;gap:2px;margin-bottom:8px}
+.tstrs span{color:var(--amber);font-size:11px}
+.tq2{font-size:12px;color:var(--ink2);line-height:1.7;margin-bottom:12px;font-style:italic}
+.tn2{font-family:var(--g);font-size:12px;font-weight:600;color:var(--ink)}
+.tr2{font-family:var(--m);font-size:10px;color:var(--ink3)}
+
+/* PROOF NUMBERS */
+.pn4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.pn{background:var(--panel);padding:20px 10px;text-align:center}
+.pnv{font-family:var(--g);font-size:1.9rem;font-weight:700;color:var(--teal);line-height:1;margin-bottom:4px;letter-spacing:-.02em}
+.pnl{font-family:var(--m);font-size:9px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;line-height:1.4}
+
+/* SPEC TABLE */
+.spec{width:100%;border-collapse:collapse}
+.spec tr{border-bottom:1px solid var(--border)}
+.spec tr:last-child{border-bottom:none}
+.spec td{padding:10px 0;font-size:12px;vertical-align:top}
+.spec td:first-child{font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.04em;width:42%;padding-right:12px;padding-top:12px;text-transform:uppercase}
+.spec td:last-child{font-weight:500;color:var(--ink)}
+
+/* PHOTO GRID */
+.pg2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.pg2 img{width:100%;aspect-ratio:4/3;object-fit:cover}
+
+/* PLEDGE TIERS */
+.tiers{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.tier{background:var(--panel);padding:24px;position:relative}
+.tier.ft{background:#EFF4FF;border-left:3px solid var(--teal2)}
+.tbadge{display:inline-flex;background:var(--teal2);color:#fff;font-family:var(--m);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.tnm2{font-family:var(--m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.tier.ft .tnm2{color:var(--teal)}
+.tprow{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.tprice{font-family:var(--g);font-size:2.6rem;font-weight:700;line-height:1;color:var(--ink);letter-spacing:-.02em}
+.tier.ft .tprice{color:var(--teal)}
+.trtl{font-family:var(--m);font-size:12px;color:var(--ink3);text-decoration:line-through}
+.tsave{display:inline-block;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);color:var(--teal);padding:2px 10px;border-radius:20px;font-family:var(--m);font-size:10px;margin-bottom:14px;letter-spacing:.04em}
+.tdiv{height:1px;background:var(--border);margin:14px 0}
+.tinc{font-family:var(--m);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.tscar{display:flex;align-items:center;gap:8px;margin:12px 0 14px}
+.strack{flex:1;height:2px;background:rgba(0,0,0,.1);border-radius:2px;overflow:hidden}
+.sfill{height:100%;background:var(--teal2);border-radius:2px}
+.stxt{font-family:var(--m);font-size:10px;color:var(--ink3);white-space:nowrap}
+.btn-t{display:block;width:100%;padding:13px;text-align:center;border-radius:6px;font-family:var(--g);font-size:13px;font-weight:600;cursor:pointer;border:none;letter-spacing:-.01em;transition:opacity .15s}
+.btn-t:hover{opacity:.85}
+.btn-dk{background:var(--ink);color:#fff}
+.btn-tl{background:var(--teal2);color:#fff}
+
+/* GUARANTEE STRIP */
+.gstrip{background:#F5F5F5;padding:16px 24px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.gi{display:flex;align-items:center;gap:5px;font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.04em}
+.gi svg{width:12px;height:12px;stroke:var(--teal);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* CALLOUT */
+.callout{background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-left:3px solid var(--teal2);padding:14px 18px;margin:0 24px;border-radius:0 6px 6px 0}
+.callout p{font-size:13px;color:var(--ink2);line-height:1.65}
+.callout strong{color:var(--teal)}
+
+/* RISK NOTE */
+.risk{background:rgba(176,120,32,.07);border:1px solid rgba(176,120,32,.2);border-radius:6px;padding:14px 18px;margin:0 24px}
+.risk-t{font-family:var(--g);font-size:12px;font-weight:600;color:var(--amber);margin-bottom:4px}
+.risk p{font-size:12px;color:rgba(140,96,20,.85);line-height:1.65}
+
+/* TIMELINE */
+.tl{padding:0 24px}
+.tlr{display:flex;gap:12px;padding-bottom:20px;position:relative}
+.tlr:not(:last-child)::after{content:'';position:absolute;left:11px;top:24px;bottom:0;width:1px;background:var(--border)}
+.tld{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--m);font-size:10px;font-weight:700;flex-shrink:0}
+.done{background:var(--teal2);color:#fff}
+.now{background:var(--teal);color:#fff}
+.next{background:var(--panel2);color:var(--ink3);border:1px solid var(--border2)}
+.tl-dt{font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+.tl-lb{font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:2px}
+.tl-sb{font-size:12px;color:var(--ink3)}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-q{width:100%;text-align:left;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;font-family:var(--g);font-size:13px;font-weight:500;color:var(--ink);cursor:pointer;background:none;border:none;transition:background .12s}
+.faq-q:hover{background:var(--panel)}
+.faq-ico{width:18px;height:18px;border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border .2s}
+.faq-ico svg{width:8px;height:8px;stroke:var(--ink3);fill:none;stroke-width:2;transition:transform .2s}
+.faq-item.open .faq-ico{background:var(--teal2);border-color:var(--teal2)}
+.faq-item.open .faq-ico svg{stroke:#fff;transform:rotate(45deg)}
+.faq-a{display:none;padding:0 24px 14px;font-size:13px;color:var(--ink2);line-height:1.75}
+.faq-item.open .faq-a{display:block}
+
+/* STRETCH */
+.sg-list{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.sg-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--panel)}
+.sg-item.ul{background:rgba(21,101,192,.06);border-left:2px solid var(--teal2)}
+.sg-amt{font-family:var(--m);font-size:12px;font-weight:700;color:var(--teal);min-width:56px;flex-shrink:0}
+.sg-desc{font-size:13px;color:var(--ink2);flex:1}
+.sg-st{font-family:var(--m);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);white-space:nowrap}
+.sg-item.ul .sg-st{color:var(--teal)}
+
+/* FOOTER */
+.foot{background:#F5F5F5;border-top:1px solid var(--border);padding:28px 24px;text-align:center}
+.foot-logo{font-family:var(--g);font-size:1.3rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;margin-bottom:6px}
+.foot-tag{font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase}
+.foot-note{margin-top:16px;font-size:11px;color:var(--ink3);line-height:1.6;font-family:var(--m)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+
+/* PRODUCT INTRO FULL-WIDTH VIDEO OVERLAY */
+.hero-vid-wrap{position:relative;background:#111}
+.hero-vid-wrap video{width:100%;display:block}
+.hero-vid-overlay{position:absolute;bottom:0;left:0;right:0;padding:24px;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 100%)}
+.hero-vid-overlay h1{font-family:var(--g);font-size:clamp(1.6rem,5vw,2.2rem);font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.02em;margin-bottom:6px}
+.hero-vid-overlay h1 span{color:#4DD9D9}
+.hero-vid-overlay p{font-size:13px;color:rgba(255,255,255,.75);font-family:var(--m);letter-spacing:.04em}
+</style>
+</head>
+<body>
+
+<!-- ══ HERO IMAGE ══════════════════════════════════════ -->
+<div class="rv">
+  <img src="assets/vytasync-ai-pillow-sleep-smarter-wake-be.jpg" alt="Vytasync AI Pillow — Sleep Smarter. Wake Better.">
+</div>
+
+<div class="stats rv">
+  <div class="stat"><div class="snum">≤20<sup>dB</sup></div><div class="slbl">Ultra<br>Silent</div></div>
+  <div class="stat"><div class="snum">3</div><div class="slbl">Smart<br>Zones</div></div>
+  <div class="stat"><div class="snum">3</div><div class="slbl">Core<br>Functions</div></div>
+  <div class="stat"><div class="snum">0</div><div class="slbl">Cloud<br>Upload</div></div>
+</div>
+
+<div class="s40"></div>
+
+<!-- ══ S01 THE PROBLEM ════════════════════════════════ -->
+<div class="slb rv"><span class="slb-n">01</span><span>The Problem</span></div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="ey">Why your pillow is failing you</div>
+  <h2 class="sh">Every morning you wake up stiff.<br><span>Your pillow is why.</span></h2>
+  <p class="bc">You shift positions dozens of times each night. A pillow set at one height works for the moment you fall asleep — and fails for every hour after. That morning stiffness isn't just how sleep feels. <strong>It's a pillow that can't adapt.</strong></p>
+</div>
+<div class="s24"></div>
+
+<!-- Before/after videos side by side -->
+<div class="ba-wrap rv">
+  <div class="ba-panel">
+    <video autoplay muted loop playsinline><source src="assets/video-1.mp4" type="video/mp4"></video>
+    <div class="ba-label bad">Too High</div>
+    <div class="ba-caption"><strong>Pillow too high</strong> — neck forced upward, muscles strain all night</div>
+  </div>
+  <div class="ba-panel">
+    <video autoplay muted loop playsinline><source src="assets/video-2.mp4" type="video/mp4"></video>
+    <div class="ba-label bad">Too Low</div>
+    <div class="ba-caption"><strong>Pillow too low</strong> — neck unsupported, spine misaligned</div>
+  </div>
+</div>
+<p class="cap rv">Standard pillows pick one fixed height — but your body changes position all night long.</p>
+
+<div class="s56"></div>
+
+<!-- ══ S02 THREE FUNCTIONS OVERVIEW ═══════════════════ -->
+<div class="slb rv"><span class="slb-n">02</span><span>Three Core Functions</span></div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="ey">What Vytasync does while you sleep</div>
+  <h2 class="sh">Three things wrong with your sleep.<br><span>One system that fixes all of them.</span></h2>
+  <p class="bc">Vytasync combines three adaptive technologies into a single sleep system — working simultaneously, silently, all night. No manual adjustments. No extra devices. No apps required.</p>
+</div>
+<div class="s24"></div>
+
+<!-- 3 function intro cards -->
+<div class="feat-detail-grid rv">
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+    <h4>01 — Traction</h4>
+    <p>Gentle cervical traction to decompress and relieve neck pressure while you sleep</p>
+    <div class="fdc-spec">Auto-decompression</div>
+  </div>
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></div>
+    <h4>02 — Height Adjust</h4>
+    <p>Detects your sleeping position and adjusts airbag height in real time, automatically</p>
+    <div class="fdc-spec">Position-responsive</div>
+  </div>
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+    <h4>03 — Breath Assist</h4>
+    <p>Monitors breathing rhythm and gently adjusts support to reduce snoring and improve airflow</p>
+    <div class="fdc-spec">Snore reduction</div>
+  </div>
+</div>
+
+<div class="s56"></div>
+
+
+<!-- ══ PROBLEM SECTION ════════════════════════════════ -->
+<div class="slb rv"><span class="slb-n">!!!</span><span>Does This Sound Familiar?</span></div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="ey">The sleep problem nobody talks about</div>
+  <h2 class="sh">You're not sleeping badly.<br><span>Your pillow is actively making it worse.</span></h2>
+  <p class="bc">Most people accept bad sleep as normal. They blame stress, screens, caffeine. But the real culprit is often simpler — and it's right under your head.</p>
+</div>
+<div class="s24"></div>
+
+<div class="rv" style="display:flex;flex-direction:column;gap:2px;background:rgba(0,0,0,.06)">
+  <div class="fdc" style="padding:0;overflow:hidden;background:#fff">
+    <div style="position:relative">
+      <img src="assets/ordinary-pillow-restless-night-sleep.gif" alt="Ordinary pillow — restless night sleep" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover">
+      <div style="position:absolute;top:8px;left:8px;background:rgba(192,48,48,.88);color:#fff;font-family:var(--m);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px">Restless night</div>
+    </div>
+    <div style="padding:16px">
+      <h4>You wake up mid-night</h4>
+      <p>Your body shifts position. The pillow doesn't follow. Discomfort pulls you out of deep sleep — sometimes without you even realising.</p>
+      <div class="fdc-spec" style="color:#C03030">Happens 30+ times a night</div>
+    </div>
+  </div>
+  <div class="fdc" style="padding:0;overflow:hidden">
+    <div style="position:relative">
+      <img src="assets/restless-sleep-neck-unsupported-without.gif" alt="Restless sleep — neck unsupported without proper pillow" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover">
+      <div style="position:absolute;top:8px;left:8px;background:rgba(192,48,48,.88);color:#fff;font-family:var(--m);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px">No support</div>
+    </div>
+    <div style="padding:16px">
+      <h4>Neck stiff every morning</h4>
+      <p>You've been sleeping for 8 hours — so why does your neck feel worse than when you went to bed? Because "sleeping" and "recovering" are not the same thing.</p>
+      <div class="fdc-spec" style="color:#C03030">Cumulative damage, night after night</div>
+    </div>
+  </div>
+  <div class="fdc" style="padding:0;overflow:hidden">
+    <div style="position:relative">
+      <img src="assets/snoring-partner-keeping-spouse-awake-at.jpg" alt="Snoring partner keeping spouse awake at 3:17 AM" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover">
+      <div style="position:absolute;top:8px;left:8px;background:rgba(192,48,48,.88);color:#fff;font-family:var(--m);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px">3:17 AM</div>
+    </div>
+    <div style="padding:16px">
+      <h4>Snoring you can't control</h4>
+      <p>When your neck tilts back during sleep, your airway narrows. Your body forces air through — that's snoring. It's not a habit. It's physics. And it's disrupting both of you.</p>
+      <div class="fdc-spec" style="color:#C03030">Ruins sleep for you and your partner</div>
+    </div>
+  </div>
+</div>
+
+<div class="s24"></div>
+
+<div style="background:#FFF3F3;border-left:3px solid #C03030;border-radius:0 6px 6px 0;padding:16px 20px;margin:0 24px" class="rv">
+  <p style="font-family:var(--g);font-size:13px;font-weight:600;color:#C03030;margin-bottom:4px">The hard truth:</p>
+  <p style="font-size:13px;color:#7A2020;line-height:1.7">You've probably tried memory foam. Cervical pillows. Different firmnesses. Maybe even a sleep tracker. None of them solved it — because none of them adapt to you while you're actually sleeping. <strong style="color:#C03030">That's the gap Vytasync was built to fill.</strong></p>
+</div>
+
+<div class="s56"></div>
+<!-- ══════════════════════════════════════════════════
+     FUNCTION 01 — TRACTION / 牵引
+══════════════════════════════════════════════════ -->
+<div class="feat-section rv">
+  <div class="feat-num-bar">
+    <div class="fn-big">01</div>
+    <div>
+      <div class="fn-title">Cervical Traction</div>
+      <div class="fn-sub">Gentle decompression while you sleep</div>
+    </div>
+  </div>
+</div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="feat-badge"><div class="fi"></div><span class="fn">Function 01 — Traction</span></div>
+  <h3 class="fh">Your spine is compressed 16 hours a day.<br><span>It needs 8 hours to recover — starting tonight.</span></h3>
+  <p class="bc">Daytime gravity compresses your cervical spine for hours. Most pillows do nothing to reverse this. Vytasync's traction mode applies a calibrated, gentle decompression force throughout the night — working while you rest, not requiring sessions or devices.</p>
+  <p class="bc"><strong>Unlike cervical traction devices that require active effort, Vytasync delivers passive decompression automatically, every night.</strong></p>
+</div>
+<div class="s24"></div>
+
+<!-- Principle animation - GIF -->
+<div class="gif-block rv">
+  <img src="assets/airbag-traction-mechanism-animation.gif" alt="Airbag traction mechanism animation">
+</div>
+<p class="cap rv">The airbag mechanism — zones A/B/C working in sequence to create gentle cervical traction</p>
+
+<div class="s24"></div>
+
+<!-- Mechanism video -->
+<div class="vid rv">
+  <video controls playsinline><source src="assets/traction-mechanism-explained.mp4" type="video/mp4"></video>
+  <div class="vid-tag">Traction mechanism — explained</div>
+</div>
+
+<div class="s24"></div>
+
+<!-- Model layers diagram -->
+<div class="rv" style="background:#F8F8F8">
+  <img src="assets/image-3.jpg" alt="Three-layer system: comfort foam, TPU airbag control, support foam">
+</div>
+<p class="cap rv">Three-layer engineering: soft comfort foam · dual-layer TPU airbag control · stable support foam — each zone independently adjustable</p>
+
+<div class="s24"></div>
+
+<!-- Traction feature detail cards -->
+<div class="feat-detail-grid rv">
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <h4>Zone A — Cervical</h4>
+    <p>Adjustable height precisely fits the curvature of your cervical spine, front and back sleepers</p>
+    <div class="fdc-spec">Primary traction zone</div>
+  </div>
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 018 0v2"/></svg></div>
+    <h4>Zone B — Cranial</h4>
+    <p>Natural support without sinking. Relieves head pressure, keeps spine in neutral alignment</p>
+    <div class="fdc-spec">Head pressure relief</div>
+  </div>
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6l4 6-4 6M21 6l-4 6 4 6"/></svg></div>
+    <h4>Zone C — Shoulder</h4>
+    <p>Keeps head and neck aligned for side sleepers. Prevents shoulder compression and neck tilt</p>
+    <div class="fdc-spec">Side-sleep support</div>
+  </div>
+</div>
+
+<div class="s32"></div>
+
+<!-- Traction checklist -->
+<div class="tb rv">
+  <ul class="cl">
+    <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>Passive — no effort, no sessions, no devices to wear</li>
+    <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>Calibrated force — gentle enough to sleep through, effective enough to matter</li>
+    <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>Three independent zones for full cervical coverage</li>
+    <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>Works alongside height adjustment — both functions active simultaneously</li>
+  </ul>
+</div>
+
+<div class="s56"></div>
+
+<!-- ══════════════════════════════════════════════════
+     FUNCTION 02 — HEIGHT ADJUSTMENT / 调高
+══════════════════════════════════════════════════ -->
+<div class="feat-section rv">
+  <div class="feat-num-bar">
+    <div class="fn-big">02</div>
+    <div>
+      <div class="fn-title">Adaptive Height</div>
+      <div class="fn-sub">Real-time position detection and adjustment</div>
+    </div>
+  </div>
+</div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="feat-badge"><div class="fi"></div><span class="fn">Function 02 — Height Adjust</span></div>
+  <h3 class="fh">You shift position 30+ times a night.<br><span>Your pillow has been ignoring it.</span></h3>
+  <p class="bc">Most people shift between side sleeping and back sleeping multiple times each night without realising it. Each position requires a different pillow height — side sleeping needs more, back sleeping needs less.</p>
+  <p class="bc"><strong>Vytasync detects every shift and adjusts within 3 seconds. Silently. Without waking you.</strong></p>
+</div>
+<div class="s24"></div>
+
+<!-- Height demo video - full width -->
+<div class="vid rv">
+  <video autoplay muted loop playsinline><source src="assets/height-adjustment-live-demo.mp4" type="video/mp4"></video>
+  <div class="vid-tag">Height adjustment — live demo</div>
+</div>
+<p class="cap rv">Watch the airbag inflate and deflate in response to position — under 3 seconds per adjustment</p>
+
+<div class="s16"></div>
+
+<!-- Height adjust manual control video -->
+<div class="vid rv">
+  <video controls playsinline><source src="assets/manual-height-control-via-app.mp4" type="video/mp4"></video>
+  <div class="vid-tag">Manual height control via app</div>
+</div>
+
+<div class="s24"></div>
+
+<!-- How height adjustment works -->
+<div class="tb rv">
+  <div class="ey">How it works</div>
+  <div class="psteps">
+    <div class="pstep">
+      <div class="psn">1</div>
+      <div><h4>Sensor layer reads your position</h4><p>Pressure sensors embedded in the pillow identify whether you're on your side, back, or shifting between — continuously, all night.</p></div>
+    </div>
+    <div class="pstep">
+      <div class="psn">2</div>
+      <div><h4>AI calculates the right height</h4><p>The bedside unit computes the optimal support profile for your current position. All processing is local — zero cloud, zero latency.</p></div>
+    </div>
+    <div class="pstep">
+      <div class="psn">3</div>
+      <div><h4>Airbags adjust in &lt;3 seconds</h4><p>Each of the three zones adjusts independently. Side-sleeping zone inflates more; back-sleeping zone deflates — silently, at ≤20 dB.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="s24"></div>
+
+<!-- Before/After comparison with standard pillow -->
+<div class="tb rv">
+  <div class="ey">Side by side comparison</div>
+</div>
+<div class="s16"></div>
+<div class="vid rv">
+  <video autoplay muted loop playsinline><source src="assets/vytasync-vs-standard-pillow-same-sleeper.mp4" type="video/mp4"></video>
+  <div class="vid-tag">Vytasync vs. standard pillow — same sleeper, same night</div>
+</div>
+<p class="cap rv">Left: standard pillow — fixed height causes repeated readjustments. Right: Vytasync — adapts automatically.</p>
+
+<div class="s32"></div>
+
+<!-- Height function cards -->
+<div class="feat-detail-grid rv">
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></div>
+    <h4>Auto-detection</h4>
+    <p>Identifies side, back, and combination sleeping without cameras or wearables</p>
+    <div class="fdc-spec">Passive sensing</div>
+  </div>
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <h4>&lt;3 sec response</h4>
+    <p>From position detection to physical adjustment in under 3 seconds — you sleep through it</p>
+    <div class="fdc-spec">≤20 dB operation</div>
+  </div>
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2"/></svg></div>
+    <h4>App override</h4>
+    <p>Prefer manual control? Set your exact height and firmness via app or the dial on the control unit</p>
+    <div class="fdc-spec">5 firmness levels</div>
+  </div>
+</div>
+
+<div class="s56"></div>
+
+<!-- ══════════════════════════════════════════════════
+     FUNCTION 03 — BREATH ASSIST / 调吸
+══════════════════════════════════════════════════ -->
+<div class="feat-section rv">
+  <div class="feat-num-bar">
+    <div class="fn-big">03</div>
+    <div>
+      <div class="fn-title">Breath Assist</div>
+      <div class="fn-sub">Snore reduction · airflow optimisation</div>
+    </div>
+  </div>
+</div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="feat-badge"><div class="fi"></div><span class="fn">Function 03 — Breath Assist</span></div>
+  <h3 class="fh">Snoring isn't a habit.<br><span>It's your airway collapsing — and it's fixable.</span></h3>
+  <p class="bc">Snoring is often caused by airway collapse when neck position tilts the head backward. Vytasync's breath assist function monitors your breathing rhythm via the sensor layer and — when irregular patterns are detected — gently elevates the neck to reopen the airway.</p>
+  <p class="bc"><strong>No mask. No straps. No devices on your face. Just a pillow that responds to how you breathe.</strong></p>
+</div>
+<div class="s24"></div>
+
+<!-- Running system video showing breath response -->
+<div class="vid rv">
+  <video autoplay muted loop playsinline><source src="assets/breath-assist-system-in-operation.mp4" type="video/mp4"></video>
+  <div class="vid-tag">Breath Assist — system in operation</div>
+</div>
+<p class="cap rv">The system runs continuously — breath assist, height adjustment, and traction all operating simultaneously</p>
+
+<div class="s24"></div>
+
+<!-- Breath assist detail cards -->
+<div class="feat-detail-grid rv">
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+    <h4>Breath monitoring</h4>
+    <p>Pressure sensors detect breathing rhythm and irregularities without contact microphones</p>
+    <div class="fdc-spec">Non-contact sensing</div>
+  </div>
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <h4>Airway positioning</h4>
+    <p>Micro-elevation of the cervical zone gently repositions the airway when snoring is detected</p>
+    <div class="fdc-spec">Auto-intervention</div>
+  </div>
+  <div class="fdc">
+    <div class="fdc-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+    <h4>Partner-friendly</h4>
+    <p>Quieter breathing means better sleep for both. Operates at ≤20 dB — below perception threshold</p>
+    <div class="fdc-spec">Silent operation</div>
+  </div>
+</div>
+
+<div class="s32"></div>
+
+<div class="tb rv">
+  <ul class="cl">
+    <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>No mask, no straps, no external devices — works through the pillow itself</li>
+    <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>Responds to detected snoring patterns, not a fixed schedule</li>
+    <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>Works alongside traction and height adjustment simultaneously</li>
+    <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>Sleep data stays local — processed on-device, never uploaded</li>
+  </ul>
+</div>
+
+<div class="s56"></div>
+
+<!-- ══ S03 HOW ALL 3 WORK TOGETHER ═════════════════════ -->
+<div class="slb rv"><span class="slb-n">03</span><span>System Overview</span></div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="ey">Three functions. One system.</div>
+  <h2 class="sh">While every other pillow sits still,<br><span>Vytasync is working.</span></h2>
+  <p class="bc">Traction, height adjustment, and breath assist don't operate in isolation — they coordinate through the same sensor layer and control unit, dynamically balancing each function based on your real-time sleep state.</p>
+</div>
+<div class="s24"></div>
+
+<!-- Comparison table - 3 functions vs alternatives -->
+<div style="overflow-x:auto" class="rv">
+  <table class="ctbl">
+    <thead>
+      <tr>
+        <th style="width:28%">Capability</th>
+        <th>Memory foam</th>
+        <th>Cervical pillow</th>
+        <th>Anti-snore device</th>
+        <th class="hc">Vytasync</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="fc">Cervical traction</td><td><span class="cxv">✕</span></td><td><span class="cpv">Partial</span></td><td><span class="cxv">✕</span></td><td class="hc"><span class="ckv">✓ Auto</span></td></tr>
+      <tr><td class="fc">Height adapts at night</td><td><span class="cxv">✕</span></td><td><span class="cxv">✕</span></td><td><span class="cxv">✕</span></td><td class="hc"><span class="ckv">✓ &lt;3 sec</span></td></tr>
+      <tr><td class="fc">Snore detection + response</td><td><span class="cxv">✕</span></td><td><span class="cxv">✕</span></td><td><span class="cpv">Mask only</span></td><td class="hc"><span class="ckv">✓ No mask</span></td></tr>
+      <tr><td class="fc">Zero effort required</td><td><span class="ckv">✓</span></td><td><span class="ckv">✓</span></td><td><span class="cxv">✕</span></td><td class="hc"><span class="ckv">✓</span></td></tr>
+      <tr><td class="fc">Silent (&lt;25 dB)</td><td><span class="ckv">✓</span></td><td><span class="ckv">✓</span></td><td><span class="cxv">✕</span></td><td class="hc"><span class="ckv">✓ 20 dB</span></td></tr>
+      <tr><td class="fc">Local AI · no subscription</td><td><span class="ckv">✓</span></td><td><span class="ckv">✓</span></td><td><span class="cpv">Often not</span></td><td class="hc"><span class="ckv">✓ Ever</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="s56"></div>
+
+<!-- ══ S04 PRODUCT DETAILS ═════════════════════════════ -->
+<div class="slb rv"><span class="slb-n">04</span><span>Product Details</span></div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="ey">Material & construction</div>
+  <h2 class="sh sm">The part most brands cut corners on.<br><span>We didn't.</span></h2>
+</div>
+<div class="s20"></div>
+<div class="rv"><img src="assets/fabric-zipper-breathability-details.jpg" alt="Fabric zipper breathability details"></div>
+<p class="cap rv">High-grade smooth zipper · skin-friendly fabric · perforated core for air circulation · removable & machine-washable cover</p>
+
+<div class="s56"></div>
+
+<!-- ══ S05 AWARDS & CERTS ══════════════════════════════ -->
+<div class="slb rv"><span class="slb-n">05</span><span>Awards & Certifications</span></div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="ey">Recognized internationally</div>
+  <h2 class="sh sm">Validated before it reached your hands.<br><span>Not after.</span></h2>
+</div>
+<div class="s20"></div>
+<div class="rv"><img src="assets/image-5.jpg" alt="2023 IDEA Finalist · MUSE Design Gold · National Health Commission First Prize"></div>
+<p class="cap rv">2023 IDEA Finalist (USA) · MUSE Design Awards Gold (USA) · First Prize — National Health Commission of China</p>
+<div class="s8"></div>
+<div class="rv"><img src="assets/fcc-ce-rohs-pse-reach-c-tick.jpg" alt="FCC CE RoHS PSE REACH C-TICK"></div>
+<p class="cap rv">FCC · CE · RoHS · PSE · REACH · C-TICK — certified for US, EU, Japan, Australia and beyond</p>
+
+<div class="s56"></div>
+
+<!-- ══ S06 BETA RESULTS ════════════════════════════════ -->
+<div class="slb rv"><span class="slb-n">06</span><span>Beta Results</span></div>
+<div class="s32"></div>
+
+<div class="banner rv">
+  <div class="ey c">Real testers · Real nights · Real results</div>
+  <h2 class="sh" style="font-size:clamp(1.6rem,5vw,2.2rem);margin-bottom:8px">87% of testers woke up better<br><span>within 2 weeks. Here's what they said.</span></h2>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.6;max-width:360px;margin:0 auto">Average rating post-trial: <strong>4.8 / 5.0.</strong> 92% said they'd recommend to a partner.</p>
+</div>
+<div class="s8"></div>
+
+<div class="pn4 rv">
+  <div class="pn"><div class="pnv">87%</div><div class="pnl">Fewer morning<br>adjustments</div></div>
+  <div class="pn"><div class="pnv">4.8</div><div class="pnl">Avg. rating<br>post-trial</div></div>
+  <div class="pn"><div class="pnv">92%</div><div class="pnl">Would rec.<br>to partner</div></div>
+  <div class="pn"><div class="pnv">30</div><div class="pnl">Night risk-free<br>trial</div></div>
+</div>
+
+<div class="s16"></div>
+
+<div class="tbig rv">
+  <div class="tstrs"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+  <p class="tq">I stopped waking up at 3am to flip my pillow. That was the thing I didn't know I needed to fix — until it stopped happening.</p>
+  <div class="tpers">
+    <div class="tav">MK</div>
+    <div><div class="tnm">Marcus K.</div><div class="trl">Product designer · Beta tester, 90 nights</div></div>
+  </div>
+</div>
+<div class="s8"></div>
+<div class="tg2 rv">
+  <div class="tc">
+    <div class="tstrs"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+    <p class="tq2">"Partner didn't notice the sound for a full week. That's what 20 dB actually means."</p>
+    <div class="tn2">Sophie L.</div><div class="tr2">Architect · 60-night beta</div>
+  </div>
+  <div class="tc">
+    <div class="tstrs"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+    <p class="tq2">"First one that actually adapts instead of just claiming to. Tried every neck pillow on Amazon."</p>
+    <div class="tn2">James T.</div><div class="tr2">Engineer · 45-night beta</div>
+  </div>
+  <div class="tc">
+    <div class="tstrs"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+    <p class="tq2">"No more 3am readjusting. No more waking my wife when I move. Both of us sleep through now."</p>
+    <div class="tn2">Daniel R.</div><div class="tr2">Remote worker · 60-night beta</div>
+  </div>
+  <div class="tc">
+    <div class="tstrs"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+    <p class="tq2">"The snore reduction function surprised me most. My partner noticed before I did."</p>
+    <div class="tn2">Aisha R.</div><div class="tr2">Nurse · 30-night beta</div>
+  </div>
+</div>
+
+<div class="s56"></div>
+
+<!-- ══ S07 SPECS ═══════════════════════════════════════ -->
+
+<!-- ══ KOL & SOCIAL MEDIA ════════════════════════════════ -->
+<div class="slb rv"><span class="slb-n">07</span><span>As Seen On</span></div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="ey">KOL reviews & social proof</div>
+  <h2 class="sh sm">People are already<br><span>talking about it.</span></h2>
+  <p class="bc">Before the Kickstarter launch, Vytasync was tested by sleep-focused creators, wellness KOLs, and tech reviewers across YouTube, Instagram, and TikTok. Here's what they said.</p>
+</div>
+<div class="s24"></div>
+
+<!-- KOL cards grid -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border)" class="rv">
+
+  <div style="background:var(--panel);padding:24px 20px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <div style="width:44px;height:44px;border-radius:50%;background:var(--panel2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--g);font-size:14px;font-weight:700;color:var(--ink3);flex-shrink:0">KOL</div>
+      <div>
+        <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink)">@username</div>
+        <div style="font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.04em">YouTube · 500K followers</div>
+      </div>
+      <div style="margin-left:auto;background:rgba(255,0,0,.08);border:1px solid rgba(255,0,0,.15);border-radius:20px;padding:2px 8px;font-family:var(--m);font-size:9px;color:#CC0000;letter-spacing:.06em;text-transform:uppercase">YouTube</div>
+    </div>
+    <!-- Video/thumbnail placeholder -->
+    <div style="aspect-ratio:16/9;background:var(--panel2);border-radius:8px;border:1.5px dashed var(--border2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-bottom:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ink3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="var(--ink3)" stroke="none"/></svg>
+      <span style="font-family:var(--m);font-size:9px;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase">Insert KOL video / thumbnail</span>
+    </div>
+    <p style="font-size:12px;color:var(--ink2);line-height:1.7;font-style:italic;margin-bottom:10px">"Add KOL quote here — what they said about the product experience, sleep improvement, or specific feature."</p>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font-family:var(--m);font-size:10px;color:var(--ink3)">👁 — views</div>
+      <div style="font-family:var(--m);font-size:10px;color:var(--ink3)">👍 — likes</div>
+    </div>
+  </div>
+
+  <div style="background:var(--panel);padding:24px 20px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <div style="width:44px;height:44px;border-radius:50%;background:var(--panel2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--g);font-size:14px;font-weight:700;color:var(--ink3);flex-shrink:0">KOL</div>
+      <div>
+        <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink)">@username</div>
+        <div style="font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.04em">Instagram · 200K followers</div>
+      </div>
+      <div style="margin-left:auto;background:rgba(131,58,180,.08);border:1px solid rgba(131,58,180,.2);border-radius:20px;padding:2px 8px;font-family:var(--m);font-size:9px;color:#833AB4;letter-spacing:.06em;text-transform:uppercase">Instagram</div>
+    </div>
+    <div style="aspect-ratio:16/9;background:var(--panel2);border-radius:8px;border:1.5px dashed var(--border2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-bottom:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ink3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="var(--ink3)" stroke="none"/></svg>
+      <span style="font-family:var(--m);font-size:9px;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase">Insert reel / post image</span>
+    </div>
+    <p style="font-size:12px;color:var(--ink2);line-height:1.7;font-style:italic;margin-bottom:10px">"Add KOL quote here — their authentic reaction to trying Vytasync for the first time or after a week of use."</p>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font-family:var(--m);font-size:10px;color:var(--ink3)">❤️ — likes</div>
+      <div style="font-family:var(--m);font-size:10px;color:var(--ink3)">💬 — comments</div>
+    </div>
+  </div>
+
+  <div style="background:var(--panel);padding:24px 20px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <div style="width:44px;height:44px;border-radius:50%;background:var(--panel2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--g);font-size:14px;font-weight:700;color:var(--ink3);flex-shrink:0">KOL</div>
+      <div>
+        <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink)">@username</div>
+        <div style="font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.04em">TikTok · 1.2M followers</div>
+      </div>
+      <div style="margin-left:auto;background:rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.1);border-radius:20px;padding:2px 8px;font-family:var(--m);font-size:9px;color:var(--ink2);letter-spacing:.06em;text-transform:uppercase">TikTok</div>
+    </div>
+    <div style="aspect-ratio:16/9;background:var(--panel2);border-radius:8px;border:1.5px dashed var(--border2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-bottom:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ink3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+      <span style="font-family:var(--m);font-size:9px;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase">Insert TikTok clip / cover</span>
+    </div>
+    <p style="font-size:12px;color:var(--ink2);line-height:1.7;font-style:italic;margin-bottom:10px">"Add KOL quote here — short punchy testimonial as it would appear in a TikTok caption or voiceover."</p>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font-family:var(--m);font-size:10px;color:var(--ink3)">▶ — plays</div>
+      <div style="font-family:var(--m);font-size:10px;color:var(--ink3)">🔁 — shares</div>
+    </div>
+  </div>
+
+  <div style="background:var(--panel);padding:24px 20px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <div style="width:44px;height:44px;border-radius:50%;background:var(--panel2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--g);font-size:14px;font-weight:700;color:var(--ink3);flex-shrink:0">KOL</div>
+      <div>
+        <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink)">@username</div>
+        <div style="font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.04em">Platform · X followers</div>
+      </div>
+      <div style="margin-left:auto;background:rgba(21,101,192,.08);border:1px solid rgba(21,101,192,.2);border-radius:20px;padding:2px 8px;font-family:var(--m);font-size:9px;color:var(--teal);letter-spacing:.06em;text-transform:uppercase">Review</div>
+    </div>
+    <div style="aspect-ratio:16/9;background:var(--panel2);border-radius:8px;border:1.5px dashed var(--border2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-bottom:14px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--ink3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span style="font-family:var(--m);font-size:9px;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase">Insert media / review screenshot</span>
+    </div>
+    <p style="font-size:12px;color:var(--ink2);line-height:1.7;font-style:italic;margin-bottom:10px">"Add media quote or reviewer comment here."</p>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font-family:var(--m);font-size:10px;color:var(--ink3)">⭐ Rating</div>
+      <div style="font-family:var(--m);font-size:10px;color:var(--ink3)">📰 Publication</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="s56"></div>
+
+<!-- ══ APP INTRODUCTION ══════════════════════════════════ -->
+<div class="slb rv"><span class="slb-n">08</span><span>The App</span></div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="ey">Vytasync App — iOS & Android</div>
+  <h2 class="sh sm">Your sleep, visible.<br><span>Your pillow, controllable.</span></h2>
+  <p class="bc">The app gives you a window into what Vytasync is doing every night — and full manual control when you want it. Everything runs locally on the control unit. The app is a dashboard, not a dependency.</p>
+</div>
+<div class="s24"></div>
+
+<!-- App hero image -->
+<div class="rv"><img src="assets/image-7.jpg" alt="Vytasync app — Cervical Traction control screen, 15 mins duration, intensity setting" style="width:100%;display:block"></div>
+
+<div class="s24"></div>
+
+<!-- App GIF — ambient light control demo -->
+<div class="rv">
+  <img src="assets/image-4.gif" alt="Vytasync app — ambient light colour control with control unit responding" style="width:100%;display:block">
+</div>
+<p class="cap rv">Ambient Light mode — colour-wheel control via app · control unit LED responds in real time</p>
+
+<div class="s8"></div>
+
+
+
+<!-- 4 app feature cards -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border)" class="rv">
+  <div style="background:var(--panel);padding:22px 18px">
+    <div style="width:38px;height:38px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </div>
+    <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px">Sleep tracking</div>
+    <div style="font-size:12px;color:var(--ink3);line-height:1.6">View nightly logs — adjustments, position shifts, breath events, and sleep score. All processed on-device.</div>
+  </div>
+  <div style="background:var(--panel);padding:22px 18px">
+    <div style="width:38px;height:38px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+    </div>
+    <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px">Manual control</div>
+    <div style="font-size:12px;color:var(--ink3);line-height:1.6">Override any zone height, firmness, or mode in real time. Per-zone sliders for full precision.</div>
+  </div>
+  <div style="background:var(--panel);padding:22px 18px">
+    <div style="width:38px;height:38px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </div>
+    <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px">Mode scheduling</div>
+    <div style="font-size:12px;color:var(--ink3);line-height:1.6">Set Recovery Mode for high-tension nights automatically. Schedule once — Vytasync handles the rest.</div>
+  </div>
+  <div style="background:var(--panel);padding:22px 18px">
+    <div style="width:38px;height:38px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px">Privacy first</div>
+    <div style="font-size:12px;color:var(--ink3);line-height:1.6">No account needed. Bluetooth only. All data stays on your control unit — nothing leaves your home.</div>
+  </div>
+</div>
+
+<!-- Optional note -->
+<div style="background:var(--panel2);border-top:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:10px" class="rv">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--ink3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2.5"/></svg>
+  <span style="font-size:12px;color:var(--ink3);line-height:1.5">The app is <strong style="color:var(--ink);font-weight:500">completely optional</strong>. All three functions run automatically without it — just plug in and sleep.</span>
+</div>
+
+<div class="s56"></div>
+<div class="slb rv"><span class="slb-n">09</span><span>Specifications</span></div>
+<div class="s32"></div>
+<div class="tb rv"><div class="ey">Full technical specs</div><h2 class="sh sm">Every spec that <span>matters.</span></h2></div>
+<div class="s16"></div>
+<div style="padding:16px 24px;background:var(--panel)" class="rv">
+  <table class="spec">
+    <tr><td>Pillow size</td><td>70 × 43 × 11–17 cm (height adjustable)</td></tr>
+    <tr><td>Air zones</td><td>3 independent zones (A · B · C)</td></tr>
+    <tr><td>Core functions</td><td>Traction · Height adjust · Breath assist</td></tr>
+    <tr><td>Comfort layer</td><td>Soft slow-rebound memory foam</td></tr>
+    <tr><td>Control layer</td><td>Dual-layer TPU pressure-resistant airbags</td></tr>
+    <tr><td>Support layer</td><td>Stable high-rebound memory foam</td></tr>
+    <tr><td>Noise level</td><td>≤ 20 dB during all adjustments</td></tr>
+    <tr><td>Response time</td><td>&lt; 3 seconds per adjustment</td></tr>
+    <tr><td>Sleep positions</td><td>Side · Back · Combination</td></tr>
+    <tr><td>Power</td><td>USB-C · 5W standby · 12W peak</td></tr>
+    <tr><td>Connectivity</td><td>Bluetooth 5.0 (app optional)</td></tr>
+    <tr><td>AI processing</td><td>100% local — no cloud connection needed</td></tr>
+    <tr><td>Cover</td><td>Removable · machine-washable</td></tr>
+    <tr><td>Certifications</td><td>FCC · CE · RoHS · PSE · REACH · C-TICK</td></tr>
+    <tr><td>Awards</td><td>2023 IDEA Finalist · MUSE Design Gold Award</td></tr>
+    <tr><td>Subscription</td><td>None. Ever.</td></tr>
+    <tr><td>Warranty</td><td>1 year (2 years with Plus tier)</td></tr>
+  </table>
+</div>
+
+<div class="s56"></div>
+
+<!-- ══ S08 MANUFACTURING ════════════════════════════════ -->
+
+<!-- ══ PACKAGING / WHAT'S IN THE BOX ════════════════════ -->
+<div class="slb rv"><span class="slb-n">10</span><span>What's In The Box</span></div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="ey">Complete system, ready to use</div>
+  <h2 class="sh sm">Everything you need.<br><span>Nothing you don't.</span></h2>
+  <p class="bc">Vytasync ships as a complete sleep system. Open the box, plug in the control unit, and you're ready. No assembly, no calibration required.</p>
+</div>
+<div class="s24"></div>
+
+<!-- Box visual placeholder -->
+<div class="rv"><img src="assets/image-1.png" alt="Vytasync complete packaging — pillow, control unit, accessories" style="width:100%;display:block;background:#f5f5f5"></div>
+
+<!-- Items grid -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border)" class="rv">
+
+  <div style="background:var(--panel);padding:20px 18px;display:flex;align-items:flex-start;gap:14px">
+    <div style="width:40px;height:40px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="3"/><path d="M6 7V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/></svg>
+    </div>
+    <div>
+      <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px">Vytasync AI Pillow</div>
+      <div style="font-size:11px;color:var(--ink3);line-height:1.5">3-zone adaptive air pillow · memory foam shell · dual-layer TPU airbags</div>
+    </div>
+  </div>
+
+  <div style="background:var(--panel);padding:20px 18px;display:flex;align-items:flex-start;gap:14px">
+    <div style="width:40px;height:40px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+    </div>
+    <div>
+      <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px">Control Unit</div>
+      <div style="font-size:11px;color:var(--ink3);line-height:1.5">Bedside AI hub · local processing · silent micro-pump · LED display</div>
+    </div>
+  </div>
+
+  <div style="background:var(--panel);padding:20px 18px;display:flex;align-items:flex-start;gap:14px">
+    <div style="width:40px;height:40px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    </div>
+    <div>
+      <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px">Premium Pillowcase ×1</div>
+      <div style="font-size:11px;color:var(--ink3);line-height:1.5">Skin-friendly fabric · breathable mesh · removable · machine-washable</div>
+    </div>
+  </div>
+
+  <div style="background:var(--panel);padding:20px 18px;display:flex;align-items:flex-start;gap:14px">
+    <div style="width:40px;height:40px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    </div>
+    <div>
+      <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px">USB-C Power Adapter</div>
+      <div style="font-size:11px;color:var(--ink3);line-height:1.5">Universal voltage · 1.8m braided cable · compatible worldwide</div>
+    </div>
+  </div>
+
+  <div style="background:var(--panel);padding:20px 18px;display:flex;align-items:flex-start;gap:14px">
+    <div style="width:40px;height:40px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"/></svg>
+    </div>
+    <div>
+      <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px">Connecting Tube</div>
+      <div style="font-size:11px;color:var(--ink3);line-height:1.5">Low-profile air tube · connects pillow to control unit · designed to disappear under bedding</div>
+    </div>
+  </div>
+
+  <div style="background:var(--panel);padding:20px 18px;display:flex;align-items:flex-start;gap:14px">
+    <div style="width:40px;height:40px;background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    </div>
+    <div>
+      <div style="font-family:var(--g);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px">Quick Start Guide</div>
+      <div style="font-size:11px;color:var(--ink3);line-height:1.5">Setup in under 5 minutes · multilingual · QR code for app download</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Plus tier extra -->
+<div style="background:rgba(21,101,192,.05);border:1px solid rgba(21,101,192,.15);border-radius:8px;padding:16px 20px;margin:2px 0 0" class="rv">
+  <div style="font-family:var(--m);font-size:10px;font-weight:700;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">Early Bird Plus tier also includes</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px">
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2)">
+      <div style="width:14px;height:14px;background:var(--teal-l);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="7" height="7" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      2nd premium pillowcase (alternating wash)
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2)">
+      <div style="width:14px;height:14px;background:var(--teal-l);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="7" height="7" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      Priority shipping tag · ships with first batch
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink2)">
+      <div style="width:14px;height:14px;background:var(--teal-l);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="7" height="7" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      Extended 2-year warranty card
+    </div>
+  </div>
+</div>
+
+<div class="s56"></div>
+<div class="slb rv"><span class="slb-n">11</span><span>Manufacturing</span></div>
+<div class="s32"></div>
+<div class="tb rv">
+  <div class="ey">This is real. It already exists.</div>
+  <h2 class="sh sm">The factory is running.<br><span>We're asking you to ship it.</span></h2>
+  <p class="bc">These are photos from our facility — taken this year. Pillow cores on the racks. Control units assembled on the line. Finished goods in the shipping bay. <strong>We are in production.</strong></p>
+</div>
+<div class="s20"></div>
+<div class="pg2 rv">
+  <img src="assets/pillow-cores-on-production-racks.jpg" alt="Pillow cores on production racks">
+  <img src="assets/control-units-assembled.jpg" alt="Control units assembled">
+</div>
+<div class="s8"></div>
+<div class="pg2 rv">
+  <img src="assets/qa-staging-area.jpg" alt="QA staging area">
+  <img src="assets/shipping-operation-area.jpg" alt="Shipping operation area">
+</div>
+<p class="cap rv">Pillow cores · assembled control units · QA staging · shipping operations — all in-house, now.</p>
+<div class="s24"></div>
+<div class="callout rv">
+  <p><strong>This campaign funds the production scale-up.</strong> Tooling is complete, factory is contracted, and 60 beta units have already shipped to testers in 3 countries. Your pledge takes us from prototype volume to full backer fulfillment.</p>
+</div>
+
+<div class="s56"></div>
+
+<!-- ══ S09 PLEDGE TIERS ════════════════════════════════ -->
+
+<!-- ══ TEAM ══════════════════════════════════════════════ -->
+<div class="slb rv"><span class="slb-n">12</span><span>Meet The Team</span></div>
+<div class="s32"></div>
+
+<div class="tb rv">
+  <div class="ey">The people behind Vytasync</div>
+  <h2 class="sh sm">Built by people who<br><span>couldn't sleep either.</span></h2>
+  <p class="bc">We started Vytasync after years of desk work, travel, and bad mornings. The problem was personal — and we had the background to actually solve it. Two years and three hardware generations later, here we are.</p>
+</div>
+<div class="s24"></div>
+
+<!-- Team group photo placeholder -->
+<div style="background:var(--panel);border:1.5px dashed var(--border2);border-radius:12px;aspect-ratio:16/7;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin-bottom:2px" class="rv">
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--ink3)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  <span style="font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase">Insert team photo here</span>
+  <span style="font-family:var(--m);font-size:9px;color:var(--ink3);opacity:.6">Lab / office setting · authentic · not stock photography</span>
+</div>
+
+<!-- Team member cards -->
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border)" class="rv">
+
+  <div style="background:var(--panel);padding:22px 16px;text-align:center">
+    <!-- Individual photo placeholder -->
+    <div style="width:64px;height:64px;border-radius:50%;background:var(--panel2);border:1.5px dashed var(--border2);display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--ink3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </div>
+    <div style="font-family:var(--g);font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px">Founder Name</div>
+    <div style="font-family:var(--m);font-size:10px;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Co-founder · CEO</div>
+    <div style="font-size:11px;color:var(--ink3);line-height:1.55">Background in hardware product development. Previously [Company]. X years experience.</div>
+  </div>
+
+  <div style="background:var(--panel);padding:22px 16px;text-align:center">
+    <div style="width:64px;height:64px;border-radius:50%;background:var(--panel2);border:1.5px dashed var(--border2);display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--ink3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </div>
+    <div style="font-family:var(--g);font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px">Founder Name</div>
+    <div style="font-family:var(--m);font-size:10px;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Co-founder · CTO</div>
+    <div style="font-size:11px;color:var(--ink3);line-height:1.55">Embedded systems engineering. MSc [Field], [University]. Specialises in AI sleep sensing.</div>
+  </div>
+
+  <div style="background:var(--panel);padding:22px 16px;text-align:center">
+    <div style="width:64px;height:64px;border-radius:50%;background:var(--panel2);border:1.5px dashed var(--border2);display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--ink3)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </div>
+    <div style="font-family:var(--g);font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px">Founder Name</div>
+    <div style="font-family:var(--m);font-size:10px;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Head of Manufacturing</div>
+    <div style="font-size:11px;color:var(--ink3);line-height:1.55">X years in consumer hardware sourcing. Factory network in Shenzhen. Ships globally.</div>
+  </div>
+
+</div>
+
+<!-- Why we can deliver -->
+<div style="background:var(--teal-l);border:1px solid rgba(21,101,192,.2);border-left:3px solid var(--teal2);border-radius:0 8px 8px 0;padding:16px 20px;margin:2px 0 0" class="rv">
+  <div style="font-family:var(--g);font-size:12px;font-weight:600;color:var(--teal);margin-bottom:8px">Why we can deliver this on time</div>
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink2)"><div style="width:14px;height:14px;background:rgba(21,101,192,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><svg width="7" height="7" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Factory contracted in Shenzhen — 12-year track record in sleep hardware</div>
+    <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink2)"><div style="width:14px;height:14px;background:rgba(21,101,192,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><svg width="7" height="7" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Tooling and molds completed — no design changes pending</div>
+    <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink2)"><div style="width:14px;height:14px;background:rgba(21,101,192,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><svg width="7" height="7" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>60 beta units already shipped to testers across 3 countries</div>
+    <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ink2)"><div style="width:14px;height:14px;background:rgba(21,101,192,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px"><svg width="7" height="7" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="var(--teal)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Patent pending on adaptive air chamber mechanism</div>
+  </div>
+</div>
+
+<div class="s56"></div>
+<div class="slb rv"><span class="slb-n">13</span><span>Pledge Tiers</span></div>
+<div class="s32"></div>
+<div class="tb c rv">
+  <div class="ey c">Back Vytasync today</div>
+  <h2 class="sh" style="text-align:center">Lock in your price<br><span>before it's gone.</span></h2>
+  <p class="bc" style="max-width:400px;margin:0 auto">All tiers include 30-night trial + free return shipping. Early Bird quantities are limited.</p>
+</div>
+<div class="s24"></div>
+
+<div class="tiers rv">
+
+  <div class="tier ft">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div class="tbadge" style="margin:0">★ Most Popular</div>
+      <div style="background:rgba(21,101,192,.1);border:1px solid rgba(21,101,192,.25);border-radius:20px;padding:3px 10px;font-family:var(--m);font-size:9px;font-weight:700;color:var(--teal);letter-spacing:.08em;text-transform:uppercase">Best value</div>
+    </div>
+    <div class="tnm2">Early Bird Plus</div>
+    <div class="tprow"><div class="tprice">$329</div><div class="trtl">$449</div></div>
+    <div class="tsave">Save 27% + priority ship + 2yr warranty</div>
+    <div class="tdiv"></div>
+    <div class="tinc">Includes</div>
+    <ul class="cl" style="margin-bottom:12px">
+      <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>Everything in Early Bird</li>
+      <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>2× premium pillowcases</li>
+      <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>Priority shipping — first batch out</li>
+      <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>2-year warranty (vs. 1-year standard)</li>
+    </ul>
+    <div class="tscar"><div class="strack"><div class="sfill" style="width:81%"></div></div><span class="stxt">194 of 1,000 remaining · ships first</span></div>
+    <button class="btn-t btn-tl">Back Early Bird Plus — $329 →</button>
+    <p style="font-family:var(--m);font-size:10px;color:var(--ink3);text-align:center;margin-top:8px;letter-spacing:.04em">Includes priority ship · 2-yr warranty · 2 pillowcases</p>
+  </div>
+
+  <div class="tier">
+    <div class="tnm2">Duo Gift Set</div>
+    <div class="tprow"><div class="tprice">$658</div><div class="trtl">$798</div></div>
+    <div class="tsave">Best deal for couples — two full systems</div>
+    <div class="tdiv"></div>
+    <div class="tinc">Includes</div>
+    <ul class="cl" style="margin-bottom:12px">
+      <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>2× Vytasync AI Pillow</li>
+      <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>1× shared control unit</li>
+      <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>4× premium pillowcases</li>
+      <li><span class="ck"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg></span>Premium gift packaging</li>
+    </ul>
+    <div class="tscar"><div class="strack"><div class="sfill" style="width:25%"></div></div><span class="stxt">Unlimited</span></div>
+    <button class="btn-t btn-dk">Back Duo Set — $658 →</button>
+    <p style="font-family:var(--m);font-size:10px;color:var(--ink3);text-align:center;margin-top:8px;letter-spacing:.04em">Both sleep better — or both get refunded</p>
+  </div>
+</div>
+
+<div class="s8"></div>
+<div class="gstrip rv">
+  <div class="gi"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>30-night trial</div>
+  <div class="gi"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Free return shipping</div>
+  <div class="gi"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Ships Q3 2026</div>
+  <div class="gi"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>No subscription · ever</div>
+</div>
+
+<div class="s56"></div>
+
+<!-- ══ S10 ROADMAP ═════════════════════════════════════ -->
+<div class="slb rv"><span class="slb-n">14</span><span>Delivery Roadmap</span></div>
+<div class="s32"></div>
+<div class="tb rv">
+  <div class="ey">When and how you'll get it</div>
+  <h2 class="sh sm">We've done the hard part.<br><span>Now we need to scale.</span></h2>
+  <p class="bc">Factory contracted, units assembling now. This campaign scales us from beta to full backer volume.</p>
+</div>
+<div class="s24"></div>
+<div class="tl rv">
+  <div class="tlr"><div class="tld done">✓</div><div><div class="tl-dt">2024–2025</div><div class="tl-lb">R&D — Gen 1 + Gen 2 prototyping</div><div class="tl-sb">Two hardware generations built and tested</div></div></div>
+  <div class="tlr"><div class="tld done">✓</div><div><div class="tl-dt">Early 2026</div><div class="tl-lb">Beta program complete</div><div class="tl-sb">30–90 nights of real-world data collected</div></div></div>
+  <div class="tlr"><div class="tld done">✓</div><div><div class="tl-dt">2025–2026</div><div class="tl-lb">Global certifications achieved</div><div class="tl-sb">FCC · CE · RoHS · REACH and more</div></div></div>
+  <div class="tlr"><div class="tld done">✓</div><div><div class="tl-dt">Early 2026</div><div class="tl-lb">Factory contracted · pilot production running</div></div></div>
+  <div class="tlr"><div class="tld now">→</div><div><div class="tl-dt">Now</div><div class="tl-lb">Kickstarter campaign live</div><div class="tl-sb">Funding the full production run</div></div></div>
+  <div class="tlr"><div class="tld next">○</div><div><div class="tl-dt">Q1–Q2 2026</div><div class="tl-lb">Mass production · QA · packing</div></div></div>
+  <div class="tlr"><div class="tld next">○</div><div><div class="tl-dt">Q3 2026</div><div class="tl-lb">Backer shipments begin</div><div class="tl-sb">Early Bird Plus ships first</div></div></div>
+</div>
+<div class="s24"></div>
+<div class="risk rv">
+  <div class="risk-t">On delays — you'll hear first.</div>
+  <p>If Q3 2026 shifts, we tell you directly before any public post — with a reason and revised date. 90+ days late: full refund, no questions.</p>
+</div>
+
+<div class="s56"></div>
+
+<!-- ══ S11 FAQ ═════════════════════════════════════════ -->
+
+
+<!-- ══ FINAL CTA ═══════════════════════════════════════ -->
+<div class="banner rv" style="padding:44px 24px">
+  <div class="ey c">Kickstarter · Live now</div>
+  <h2 class="sh" style="text-align:center;font-size:clamp(2rem,6vw,2.8rem);margin-bottom:10px">Stop waking up exhausted.<br><span>Start tonight.</span></h2>
+  <p style="font-size:13px;color:var(--ink2);line-height:1.65;max-width:360px;margin:0 auto 28px">Join early backers. Get launch pricing and ship with the first batch.</p>
+  <button class="btn-t btn-tl" style="max-width:280px;margin:0 auto;display:block;font-size:14px;padding:16px 28px">Back This Project →</button>
+  <p style="font-family:var(--m);font-size:10px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-top:14px">30-night trial · free returns · ships Q3 2026 · no subscription</p>
+  <div class="dv" style="margin:32px 0"></div>
+  <p style="font-family:var(--m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px">Stretch goals</p>
+  <div style="display:flex;flex-direction:column;gap:6px;max-width:480px;margin:0 auto;text-align:left">
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(21,101,192,.08);border:1px solid rgba(21,101,192,.2);border-radius:5px">
+      <span style="font-family:var(--m);font-size:11px;font-weight:700;color:var(--teal);min-width:52px">$150k</span>
+      <span style="font-size:12px;color:var(--ink2)">Dual-pillow sync for couples</span>
+      <span style="margin-left:auto;font-family:var(--m);font-size:9px;color:var(--teal);letter-spacing:.08em;text-transform:uppercase">✓ Unlocked</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(0,0,0,.04);border-radius:5px">
+      <span style="font-family:var(--m);font-size:11px;font-weight:700;color:var(--ink3);min-width:52px">$250k</span>
+      <span style="font-size:12px;color:var(--ink3)">Anti-snore position assist — enhanced breath detection</span>
+      <span style="margin-left:auto;font-family:var(--m);font-size:9px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase">Locked</span>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="foot-logo">VYTASYNC</div>
+  <div class="foot-tag">Adaptive Sleep Support System</div>
+  <div class="foot-note">© 2026 Vytasync Ltd. · Not a medical device.<br>Questions? Message us on Kickstarter — we reply within 24 hours.</div>
+</div>
+
+<script>
+const els=document.querySelectorAll('.rv');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}})},{threshold:.05});
+els.forEach(el=>obs.observe(el));
+function tf(btn){const item=btn.closest('.faq-item');const was=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open')}
+</script>
+</body>
+</html>
