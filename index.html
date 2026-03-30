@@ -1958,17 +1958,8 @@ src="https://www.facebook.com/tr?id=2347653875697492&ev=PageView
   }
 
   // ── CAPTURE SECTION submit ────────────────────
-  document.getElementById('capture-submit').addEventListener('click', () => {
-    const val = document.getElementById('capture-email').value.trim();
-    if (!val || !val.includes('@')) {
-      document.getElementById('capture-email').focus();
-      return;
-    }
-    const toast = document.getElementById('capture-success');
-    toast.style.display = 'block';
-    setTimeout(() => { toast.style.display = 'none'; }, 3500);
-    document.getElementById('capture-email').value = '';
-  });
+// 表单直接提交到 /subscribe，后端处理后跳回 /?subscribe=success
+// 成功提示由页面顶部的 URLSearchParams 检测逻辑统一处理，无需额外代码
 
   // ── FAQ ───────────────────────────────────────
   document.querySelectorAll('.faq-q').forEach(q => {
@@ -2408,7 +2399,11 @@ src="https://www.facebook.com/tr?id=2347653875697492&ev=PageView
       }
       
       // 2. 弹出成功提示
-      alert('Thank you for joining Vytasync!');
+      const toast = document.getElementById('capture-success');
+if (toast) {
+  toast.style.display = 'block';
+  setTimeout(() => { toast.style.display = 'none'; }, 3500);
+}
       
       // 3. 清理 URL 参数，防止刷新页面导致重复统计
       window.history.replaceState({}, document.title, window.location.pathname);
