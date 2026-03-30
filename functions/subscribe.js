@@ -1,13 +1,13 @@
 export async function onRequestPost({ request, env }) {
-  const origin = new URL(request.url).origin;
-  
   try {
     const data = await request.formData();
     const email = data.get('email');
     const location = data.get('location') || 'unknown';
     const KLAVIYO_LIST_ID = 'Us6BtR';
 
-    if (!email) return Response.redirect(`${origin}/?subscribe=error&msg=no_email`, 303);
+    if (!email) {
+      return Response.json({ ok: false, msg: 'no_email' }, { status: 400 });
+    }
 
     const response = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
       method: 'POST',
@@ -27,7 +27,7 @@ export async function onRequestPost({ request, env }) {
                 attributes: {
                   email: email,
                   subscriptions: {
-                    email: { marketing: { consent: "SUBSCRIBED" } }
+                    email: { marketing: { consent: 'SUBSCRIBED' } }
                   }
                 }
               }]
@@ -46,14 +46,12 @@ export async function onRequestPost({ request, env }) {
     });
 
     if (response.ok) {
-      // 成功：跳回首页并触发 GA4
-      return Response.redirect(`${origin}/?subscribe=success&from=${location}`, 303);
+      return Response.json({ ok: true, location }, { status: 200 });
     } else {
-      // 失败：抓取详细报错信息
       const errorDetail = await response.text();
-      return Response.redirect(`${origin}/?subscribe=error&status=${response.status}&detail=${encodeURIComponent(errorDetail)}`, 303);
+      return Response.json({ ok: false, status: response.status, detail: errorDetail }, { status: 500 });
     }
   } catch (err) {
-    return Response.redirect(`${origin}/?subscribe=error&msg=crash`, 303);
+    return Response.json({ ok: false, msg: 'crash', error: err.message }, { status: 500 });
   }
 }
