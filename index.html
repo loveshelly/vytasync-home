@@ -1,6 +1,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1453,7 +1455,7 @@ src="https://www.facebook.com/tr?id=2347653875697492&ev=PageView
     <h1 class="hero-h1">Smarter sleep.<br>Better wake-ups.</h1>
     <p class="hero-sub">Sign up now to reserve the limited 50% OFF launch day special!</p>
     <div class="hero-btns">
-      <a href="#" class="btn-primary open-modal">Grab 50% Early Bird Price 🎁</a>
+      <a href="#" class="btn-primary open-modal">Grap 50% Early Bird Price 🎁</a>
     
     </div>
     <p class="hero-microcopy">Ships Q3 2026 · Early backers ship first · 30-night risk-free trial</p>
@@ -1750,7 +1752,7 @@ src="https://www.facebook.com/tr?id=2347653875697492&ev=PageView
   
   <input type="email" name="email" class="capture-input" id="capture-email" placeholder="your@email.com" required>
   
-  <button type="submit" class="btn-primary" id="capture-submit">Grab Yours Now</button>
+  <button type="submit" class="btn-primary" id="capture-submit">Grap Yours Now</button>
 </form>
     <p class="capture-microcopy">Unsubscribe anytime. · 17 people already on the list.</p>
   </div>
@@ -1815,13 +1817,13 @@ src="https://www.facebook.com/tr?id=2347653875697492&ev=PageView
   <div class="footer-links">
     <a href="#">Privacy</a>
     <a href="#">Terms</a>
-    <a href="mailto:contact@vytasync.com">Contact</a>
+    <a href="/cdn-cgi/l/email-protection#90f3fffee4f1f3e4d0e6e9e4f1e3e9fef3bef3fffd">Contact</a>
     <a href="https://www.kickstarter.com" target="_blank">Kickstarter</a>
   </div>
   <div class="footer-copy">© 2026 Vytasync. All rights reserved.</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── STICKY BAR on scroll ──────────────────────
   const stickyBar = document.getElementById('sticky-bar');
   window.addEventListener('scroll', () => {
@@ -1850,12 +1852,35 @@ src="https://www.facebook.com/tr?id=2347653875697492&ev=PageView
       document.getElementById('modal-email').focus();
       return;
     }
-    // Haptic feedback on submit
-    if (navigator.vibrate) {
-      navigator.vibrate([50, 100, 50]);
-    }
-    modalFormWrap.classList.add('hide');
-    modalSuccess.classList.add('show');
+    if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
+
+    const btn = document.getElementById('modal-submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Joining...';
+
+    const formData = new FormData();
+    formData.append('email', val);
+    formData.append('location', 'modal');
+
+    fetch('/subscribe', { method: 'POST', body: formData })
+      .then(res => res.json())
+      .then(json => {
+        if (json.ok) {
+          modalFormWrap.classList.add('hide');
+          modalSuccess.classList.add('show');
+          if (typeof gtag === 'function') gtag('event', 'generate_lead', { signup_location: 'modal', event_label: 'Klaviyo Subscription' });
+          if (typeof fbq === 'function') fbq('track', 'CompleteRegistration');
+        } else {
+          alert('Something went wrong. Please try again.');
+          btn.disabled = false;
+          btn.textContent = 'Claim My Spot';
+        }
+      })
+      .catch(() => {
+        alert('Network error. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Claim My Spot';
+      });
   });
 
   // ── COUNTDOWN TIMER ────────────────────────────
@@ -1958,8 +1983,49 @@ src="https://www.facebook.com/tr?id=2347653875697492&ev=PageView
   }
 
   // ── CAPTURE SECTION submit ────────────────────
-// 表单直接提交到 /subscribe，后端处理后跳回 /?subscribe=success
-// 成功提示由页面顶部的 URLSearchParams 检测逻辑统一处理，无需额外代码
+  document.querySelector('.capture-form-inline').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const val = document.getElementById('capture-email').value.trim();
+    if (!val || !val.includes('@')) {
+      document.getElementById('capture-email').focus();
+      return;
+    }
+    const btn = document.getElementById('capture-submit');
+    btn.disabled = true;
+    btn.textContent = 'Joining...';
+
+    const formData = new FormData(this);
+    fetch('/subscribe', {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => {
+      if (res.ok) {
+        const toast = document.getElementById('capture-success');
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 3500);
+        document.getElementById('capture-email').value = '';
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', {
+            'signup_location': 'capture_section',
+            'event_label': 'Klaviyo Subscription'
+          });
+        }
+        if (typeof fbq === 'function') {
+          fbq('track', 'CompleteRegistration');
+        }
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    })
+    .catch(() => {
+      alert('Network error. Please try again.');
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.textContent = 'Grab Yours Now';
+    });
+  });
 
   // ── FAQ ───────────────────────────────────────
   document.querySelectorAll('.faq-q').forEach(q => {
@@ -2384,31 +2450,6 @@ src="https://www.facebook.com/tr?id=2347653875697492&ev=PageView
 </script>
 <script>
   window.addEventListener('load', function() {
-    // 检查 URL 是否包含从 subscribe.js 返回的成功信号
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('subscribe') === 'success') {fbq('track', 'CompleteRegistration');
-      const fromLocation = urlParams.get('from') || 'general';
-      
-      // 1. 向 GA4 发送转化事件
-      if (typeof gtag === 'function') {
-        gtag('event', 'generate_lead', {
-          'signup_location': fromLocation,
-          'event_label': 'Klaviyo Subscription'
-        });
-        console.log('GA4 Lead Event Sent from: ' + fromLocation);
-      }
-      
-      // 2. 弹出成功提示
-      const toast = document.getElementById('capture-success');
-if (toast) {
-  toast.style.display = 'block';
-  setTimeout(() => { toast.style.display = 'none'; }, 3500);
-}
-      
-      // 3. 清理 URL 参数，防止刷新页面导致重复统计
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
+    // URL param check removed — all forms now use fetch and show toast directly
   });
 </script>
-</body>
-</html>
