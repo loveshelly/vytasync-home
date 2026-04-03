@@ -4,6 +4,7 @@ export async function onRequestPost({ request, env }) {
     const email = data.get('email');
     const location = data.get('location') || 'unknown';
     const KLAVIYO_LIST_ID = 'Us6BtR';
+        const KLAVIYO_API_KEY = env.KLAVIYO_PRIVATE_API_KEY || 'pk_d4603cd4986361623227a4d25f4de89bae'
 
     if (!email) {
       return Response.json({ ok: false, msg: 'no_email' }, { status: 400 });
@@ -12,7 +13,7 @@ export async function onRequestPost({ request, env }) {
     const response = await fetch('https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs/', {
       method: 'POST',
       headers: {
-        'Authorization': `Klaviyo-API-Key ${env.KLAVIYO_PRIVATE_API_KEY}`,
+                'Authorization': `Klaviyo-API-Key ${KLAVIYO_API_KEY}`,
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'revision': '2024-02-15'
