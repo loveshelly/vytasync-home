@@ -50,6 +50,10 @@ nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-co
 .nav-link:hover{color:#fff}
 .nav-btn{background:#fff;color:#111;border:none;border-radius:100px;padding:9px 22px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.2px;transition:background .2s,transform .15s}
 .nav-btn:hover{background:var(--sage2);transform:scale(1.02)}
+.ks-nav-link{display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.65);font-size:13px;text-decoration:none;transition:color .15s;white-space:nowrap}
+.ks-nav-link:hover{color:#05CE78}
+.ks-footer-link{display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.35);font-size:12.5px;text-decoration:none;transition:color .15s}
+.ks-footer-link:hover{color:#05CE78}
 
 /* ── HERO ───────────────────────────── */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 24px 64px;overflow:hidden;text-align:center;background:#060606}
@@ -265,7 +269,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
 /* ── RESPONSIVE ──────────────────────── */
 @media(max-width:900px){
   nav{padding:0 20px}
-  .nav-right .nav-link{display:none}
+  .nav-right .nav-link,.ks-nav-link span{display:none}
   .wrap,.wrap-narrow{padding:64px 20py}
   .stats-bar{flex-wrap:wrap;padding:28px 20px;gap:0}
   .stat-item{min-width:50%;padding:16px 20px;border-bottom:1px solid var(--bd-light)}
@@ -306,6 +310,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
   <div class="nav-right">
     <a href="#modes" class="nav-link">How it works</a>
     <a href="#reviews" class="nav-link">Reviews</a>
+    <a href="https://www.kickstarter.com/projects/185996931/vytasync-the-smart-air-pillow" target="_blank" rel="noopener" class="ks-nav-link"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="5" fill="#05CE78"/><text x="5.5" y="15" font-family="Arial Black,sans-serif" font-size="13" font-weight="900" fill="white">K</text></svg><span>Back on Kickstarter</span></a>
     <button class="nav-btn" onclick="document.getElementById('hf-email').focus();document.getElementById('hf-email').scrollIntoView({behavior:'smooth'})">Claim 50% Off</button>
   </div>
 </nav>
@@ -627,7 +632,8 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
 <!-- FOOTER -->
 <footer>
   <div class="logo-sm">VYTASYNC</div>
-  <div>© 2026 Vytasync. All rights reserved. · Launching on Kickstarter · Ships Q3 2026</div>
+  <div>© 2026 Vytasync. All rights reserved. · Ships Q3 2026</div>
+  <a href="https://www.kickstarter.com/projects/185996931/vytasync-the-smart-air-pillow" target="_blank" rel="noopener" class="ks-footer-link"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="4" fill="#05CE78"/><text x="4.5" y="13.5" font-family="Arial Black,sans-serif" font-size="12" font-weight="900" fill="white">K</text></svg>Back us on Kickstarter ↗</a>
 </footer>
 
 <!-- STICKY MOBILE -->
