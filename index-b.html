@@ -295,7 +295,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
   h1.hero-h1{font-size:42px}
   .e-pill,.b-pill{flex-direction:column;border-radius:14px;padding:12px;gap:10px}
   .e-pill input,.b-pill input{text-align:center}
-  .btn{width:100%;text-align:center;padding:14px}
+  .e-pill .btn,.b-pill .btn{width:100%;text-align:center;padding:14px}
 }
 </style>
 </head>
@@ -686,10 +686,24 @@ document.addEventListener('keydown',e=>{
   if(m[e.target.id])sub(m[e.target.id]);
 });
 
-new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');} });},{threshold:.1})
-  .observe&&document.querySelectorAll('.reveal').forEach(el=>{
-    new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});},{threshold:.1}).observe(el);
-  });
+(function(){
+  function addVisible(el){el.classList.add('visible');}
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)addVisible(e.target);});},{threshold:.1,rootMargin:'0px 0px -20px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  } else {
+    document.querySelectorAll('.reveal').forEach(addVisible);
+  }
+  function revealViewport(){
+    document.querySelectorAll('.reveal').forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(r.top<window.innerHeight+80)addVisible(el);
+    });
+  }
+  revealViewport();
+  setTimeout(revealViewport,150);
+  setTimeout(revealViewport,600);
+})();
 
 function toggleFaq(btn){const item=btn.closest('.faq-item');const o=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!o)item.classList.add('open');}
 
