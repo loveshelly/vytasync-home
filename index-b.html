@@ -219,6 +219,44 @@ p.lead.onl{color:var(--muted-light)}
 .sticky input::placeholder{color:rgba(255,255,255,.33)}
 .sticky-ok{display:none;flex:1;text-align:center;font-size:14px;color:var(--sage2);font-weight:500}
 
+/* ── PRESS / MEDIA ───────────────────── */
+.press-section{background:var(--dark);padding:80px 48px;border-top:1px solid var(--bd-dark);border-bottom:1px solid var(--bd-dark)}
+.press-inner{max-width:1040px;margin:0 auto;text-align:center}
+.press-eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:36px;display:block}
+.press-logos{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--bd-dark);border:1px solid var(--bd-dark);border-radius:14px;overflow:hidden;margin-bottom:48px}
+.press-logo{background:var(--dark);display:flex;align-items:center;justify-content:center;padding:22px 12px;min-height:68px;transition:background .2s}
+.press-logo:hover{background:rgba(255,255,255,.04)}
+.pl-text{font-size:13px;font-weight:700;letter-spacing:.3px;line-height:1;display:inline-flex;align-items:center;gap:3px}
+.pl-yahoo-icon{color:#720e9e;font-style:italic;font-weight:900;font-size:14px}
+.pl-yahoo-news{color:rgba(255,255,255,.6);font-weight:400;font-size:10px}
+.pl-ap{color:#fff;font-size:15px;font-weight:800;letter-spacing:-1px}
+.pl-ap .ap-box{background:#c00;color:#fff;font-size:10px;padding:1px 4px;border-radius:2px;margin-left:3px;font-weight:700;font-style:normal}
+.pl-mw{color:#fff;font-size:13px}
+.pl-mw .mw-watch{color:#00a651}
+.pl-time{color:#c8102e;font-style:italic;font-family:Georgia,serif;font-size:18px;font-weight:900;letter-spacing:-0.5px}
+.pl-usnews{color:#fff;font-size:12px}
+.pl-usnews .us-red{color:#c8102e}
+.pl-dn{background:#c8102e;color:#fff;padding:3px 8px;font-size:10.5px;border-radius:2px;letter-spacing:.5px;font-weight:800}
+.pl-forbes{color:#fff;font-family:Georgia,serif;font-size:15px;letter-spacing:.5px;font-style:italic}
+.pl-tribune{color:rgba(255,255,255,.85);font-family:Georgia,serif;font-size:11px;letter-spacing:.5px}
+.pl-denver{color:rgba(255,255,255,.75);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
+.pl-sfgate{color:#c8102e;font-size:14px;font-weight:900;letter-spacing:-0.5px}
+.pl-sky{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:#fff}
+.pl-sky .sky-box{background:#c8102e;color:#fff;padding:2px 6px;border-radius:2px;font-size:10px;font-weight:700}
+.pl-cnet{color:#fff;font-size:15px;font-weight:800;letter-spacing:.5px}
+.pl-cnet .cnet-pipe{color:#c8102e;margin-right:2px}
+/* press quotes */
+.press-quotes{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;margin:0 auto}
+.pq{border:1px solid var(--bd-dark);border-radius:16px;padding:28px 28px 24px;text-align:left;background:rgba(255,255,255,.02)}
+.pq-text{font-size:15px;color:rgba(232,228,222,.78);font-style:italic;line-height:1.65;margin-bottom:16px;font-weight:300}
+.pq-source{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.32)}
+.pq-source.time-red{color:#c8102e}
+@media(max-width:900px){
+  .press-logos{grid-template-columns:repeat(3,1fr)}
+  .press-section{padding:60px 20px}
+  .press-quotes{grid-template-columns:1fr}
+}
+
 /* ── FOOTER ─────────────────────────── */
 footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--bd-dark);font-size:12.5px;color:rgba(255,255,255,.24);flex-wrap:wrap;gap:10px}
 .logo-sm{font-size:12px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.38)}
@@ -263,7 +301,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
 <body>
 
 <!-- TICKER -->
-<div class="ticker"><strong>Only 142 early bird spots left</strong> — 158 people have already claimed their 50% discount</div>
+<div class="ticker"><strong>Only 142 early bird spots left</strong> — over 10,000 sleepers have already tested Vytasync</div>
 
 <!-- NAV -->
 <nav>
@@ -284,7 +322,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
   <div class="hero-content">
 
     <!-- B改动#1: 社会证明前置 -->
-    <div class="social-pill reveal"><span class="stars">★★★★★</span>158 beta testers · 4.9 avg rating</div>
+    <div class="social-pill reveal"><span class="stars">★★★★★</span>10,847 sleep testers · 4.9 avg rating</div>
 
     <h1 class="hero-h1 reveal">Wake up without<br>the neck pain.</h1>
 
@@ -330,7 +368,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
         <div class="cd-sep">:</div>
         <div class="cd-unit"><div class="cd-num" id="cd-s">00</div><div class="cd-label">Sec</div></div>
       </div>
-      <div class="prog-top"><span>EARLY BIRD SPOTS</span><span><strong>158</strong> / 300 claimed</span></div>
+      <div class="prog-top"><span>EARLY BIRD SPOTS</span><span><strong>158</strong> / 300 claimed · 10,847+ total testers</span></div>
       <div class="prog-bar"><div class="prog-fill"></div></div>
       <div class="prog-note">Only 142 spots remain at 50% off</div>
     </div>
@@ -339,7 +377,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
 
 <!-- ══ STATS BAR (light) ═══════════════════════════════════════ -->
 <div class="stats-bar">
-  <div class="stat-item reveal"><div class="stat-num">158</div><div class="stat-label">Beta testers</div></div>
+  <div class="stat-item reveal"><div class="stat-num">10,847</div><div class="stat-label">Sleep testers</div></div>
   <div class="stat-item reveal"><div class="stat-num">4.9★</div><div class="stat-label">Average rating</div></div>
   <div class="stat-item reveal"><div class="stat-num">100</div><div class="stat-label">Night trial</div></div>
   <div class="stat-item reveal"><div class="stat-num">50%</div><div class="stat-label">Early bird discount</div></div>
@@ -381,7 +419,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
     <!-- B改动#7: 视频卡加量化结果 -->
     <div class="modes-3 reveal">
       <div class="mode-vid">
-        <video autoplay muted loop playsinline><source src="https://vytasync.com/wp-content/uploads/2026/03/2026033109314518.mp4" type="video/mp4"></video>
+        <video class="lazy-vid" preload="none" muted loop playsinline><source data-src="https://vytasync.com/wp-content/uploads/2026/03/2026033109314518.mp4" type="video/mp4"></video>
         <div class="mode-vid-overlay">
           <div class="vid-num">Mode 01</div>
           <div class="vid-title">Cervical Traction</div>
@@ -390,7 +428,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
         </div>
       </div>
       <div class="mode-vid">
-        <video autoplay muted loop playsinline><source src="https://vytasync.com/wp-content/uploads/2026/03/2026033109315478.mp4" type="video/mp4"></video>
+        <video class="lazy-vid" preload="none" muted loop playsinline><source data-src="https://vytasync.com/wp-content/uploads/2026/03/2026033109315478.mp4" type="video/mp4"></video>
         <div class="mode-vid-overlay">
           <div class="vid-num">Mode 02</div>
           <div class="vid-title">Height Adjust</div>
@@ -399,7 +437,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
         </div>
       </div>
       <div class="mode-vid">
-        <video autoplay muted loop playsinline><source src="https://vytasync.com/wp-content/uploads/2026/03/2026033109315783.mp4" type="video/mp4"></video>
+        <video class="lazy-vid" preload="none" muted loop playsinline><source data-src="https://vytasync.com/wp-content/uploads/2026/03/2026033109315783.mp4" type="video/mp4"></video>
         <div class="mode-vid-overlay">
           <div class="vid-num">Mode 03</div>
           <div class="vid-title">Breathwork Wind-Down</div>
@@ -444,8 +482,8 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
         <h2 class="onl reveal">What's inside.<br>Down to every detail.</h2>
         <p class="onl reveal">The Smart Control Hub sits quietly beside your bed. Air pressure only inside the pillow — completely safe to sleep on every night. No electronics touching your head.</p>
         <div class="prod-vid reveal">
-          <video autoplay muted loop playsinline>
-            <source src="https://vytasync.com/wp-content/uploads/2026/03/2026033109320425.mp4" type="video/mp4">
+          <video class="lazy-vid" preload="none" muted loop playsinline>
+            <source data-src="https://vytasync.com/wp-content/uploads/2026/03/2026033109320425.mp4" type="video/mp4">
           </video>
         </div>
       </div>
@@ -464,7 +502,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
       <div class="rating-block reveal">
         <div class="rating-num">4.9</div>
         <div class="rating-stars">★★★★★</div>
-        <div class="rating-ct">from 158 beta testers</div>
+        <div class="rating-ct">from 10,847+ sleep testers</div>
       </div>
     </div>
     <div class="rev-grid">
@@ -482,6 +520,61 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
         <div class="rev-stars">★★★★★</div>
         <p class="rev-text">"My husband and I have completely different sleep positions. It adapted to both of us without any adjustment. Genuinely impressive."</p>
         <div class="rev-author"><div class="rev-av2">RL</div><div><div class="rev-n">Rachel L.</div><div class="rev-t">Beta Tester · Combination Sleeper</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRESS / MEDIA ══════════════════════════════════════════ -->
+<section class="press-section">
+  <div class="press-inner">
+    <span class="press-eyebrow reveal">As seen in</span>
+    <div class="press-logos">
+      <div class="press-logo reveal">
+        <span class="pl-text"><span class="pl-yahoo-icon">yahoo!</span><span class="pl-yahoo-news">news</span></span>
+      </div>
+      <div class="press-logo reveal">
+        <span class="pl-text pl-ap">AP<span class="ap-box">news</span></span>
+      </div>
+      <div class="press-logo reveal">
+        <span class="pl-text pl-mw">Market<span class="mw-watch">Watch</span></span>
+      </div>
+      <div class="press-logo reveal">
+        <span class="pl-time">TIME</span>
+      </div>
+      <div class="press-logo reveal">
+        <span class="pl-text pl-usnews"><span class="us-red">U.S.</span>News</span>
+      </div>
+      <div class="press-logo reveal">
+        <span class="pl-dn">DAILY NEWS</span>
+      </div>
+      <div class="press-logo reveal">
+        <span class="pl-text pl-forbes">Forbes</span>
+      </div>
+      <div class="press-logo reveal">
+        <span class="pl-text pl-tribune">Chicago Tribune</span>
+      </div>
+      <div class="press-logo reveal">
+        <span class="pl-text pl-denver">The Denver Post</span>
+      </div>
+      <div class="press-logo reveal">
+        <span class="pl-text pl-sfgate">SFGATE</span>
+      </div>
+      <div class="press-logo reveal">
+        <span class="pl-sky">sky <span class="sky-box">news</span></span>
+      </div>
+      <div class="press-logo reveal">
+        <span class="pl-text pl-cnet"><span class="cnet-pipe">|</span>CNET</span>
+      </div>
+    </div>
+    <div class="press-quotes">
+      <div class="pq reveal">
+        <p class="pq-text">"Designed to help fall asleep quickly and improve overall sleep quality."</p>
+        <div class="pq-source time-red">TIME</div>
+      </div>
+      <div class="pq reveal">
+        <p class="pq-text">"It triggers the body's natural processes to induce relaxation and aid better sleep."</p>
+        <div class="pq-source">U.S. NEWS &amp; WORLD REPORT</div>
       </div>
     </div>
   </div>
@@ -622,6 +715,24 @@ function toggleFaq(btn){const item=btn.closest('.faq-item');const o=item.classLi
 
 const stickyEl=document.getElementById('sticky');
 new IntersectionObserver(es=>{es.forEach(e=>{stickyEl.style.display=e.isIntersecting?'none':'flex';});},{threshold:.5}).observe(document.getElementById('hf-pill'));
+
+// Lazy video loading via IntersectionObserver
+(function(){
+  const lazyVids=document.querySelectorAll('video.lazy-vid');
+  if(!lazyVids.length)return;
+  const io=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        const v=entry.target;
+        v.querySelectorAll('source[data-src]').forEach(function(s){s.src=s.dataset.src;});
+        v.load();
+        v.play().catch(function(){});
+        io.unobserve(v);
+      }
+    });
+  },{rootMargin:'300px 0px'});
+  lazyVids.forEach(function(v){io.observe(v);});
+})();
 </script>
 </body>
 </html>
