@@ -224,30 +224,14 @@ p.lead.onl{color:var(--muted-light)}
 .press-inner{max-width:1040px;margin:0 auto;text-align:center}
 .press-eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:36px;display:block}
 .press-logos{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--bd-dark);border:1px solid var(--bd-dark);border-radius:14px;overflow:hidden;margin-bottom:48px}
-.press-logo{background:var(--dark);display:flex;align-items:center;justify-content:center;padding:22px 12px;min-height:68px;transition:background .2s}
+.press-logo{background:var(--dark);display:flex;align-items:center;justify-content:center;padding:22px 16px;min-height:68px;transition:background .2s}
+.press-logo img{height:22px;width:auto;max-width:110px;filter:brightness(0) invert(1);opacity:.7;transition:opacity .2s}
+.press-logo:hover img{opacity:1}
 .press-logo:hover{background:rgba(255,255,255,.04)}
-.pl-text{font-size:13px;font-weight:700;letter-spacing:.3px;line-height:1;display:inline-flex;align-items:center;gap:3px}
-.pl-yahoo-icon{color:#720e9e;font-style:italic;font-weight:900;font-size:14px}
-.pl-yahoo-news{color:rgba(255,255,255,.6);font-weight:400;font-size:10px}
-.pl-ap{color:#fff;font-size:15px;font-weight:800;letter-spacing:-1px}
-.pl-ap .ap-box{background:#c00;color:#fff;font-size:10px;padding:1px 4px;border-radius:2px;margin-left:3px;font-weight:700;font-style:normal}
-.pl-mw{color:#fff;font-size:13px}
-.pl-mw .mw-watch{color:#00a651}
-.pl-time{color:#c8102e;font-style:italic;font-family:Georgia,serif;font-size:18px;font-weight:900;letter-spacing:-0.5px}
-.pl-usnews{color:#fff;font-size:12px}
-.pl-usnews .us-red{color:#c8102e}
-.pl-dn{background:#c8102e;color:#fff;padding:3px 8px;font-size:10.5px;border-radius:2px;letter-spacing:.5px;font-weight:800}
-.pl-forbes{color:#fff;font-family:Georgia,serif;font-size:15px;letter-spacing:.5px;font-style:italic}
-.pl-tribune{color:rgba(255,255,255,.85);font-family:Georgia,serif;font-size:11px;letter-spacing:.5px}
-.pl-denver{color:rgba(255,255,255,.75);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
-.pl-sfgate{color:#c8102e;font-size:14px;font-weight:900;letter-spacing:-0.5px}
-.pl-sky{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:#fff}
-.pl-sky .sky-box{background:#c8102e;color:#fff;padding:2px 6px;border-radius:2px;font-size:10px;font-weight:700}
-.pl-cnet{color:#fff;font-size:15px;font-weight:800;letter-spacing:.5px}
-.pl-cnet .cnet-pipe{color:#c8102e;margin-right:2px}
+
 /* press quotes */
 .press-quotes{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;margin:0 auto}
-.pq{border:1px solid var(--bd-dark);border-radius:16px;padding:28px 28px 24px;text-align:left;background:rgba(255,255,255,.02)}
+.qq{border:1px solid var(--bd-dark);border-radius:16px;padding:28px 28px 24px;text-align:left;background:rgba(255,255,255,.02)}
 .pq-text{font-size:15px;color:rgba(232,228,222,.78);font-style:italic;line-height:1.65;margin-bottom:16px;font-weight:300}
 .pq-source{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.32)}
 .pq-source.time-red{color:#c8102e}
@@ -269,7 +253,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
 @media(max-width:900px){
   nav{padding:0 20px}
   .nav-right .nav-link{display:none}
-  .wrap,.wrap-narrow{padding:64px 20px}
+  .wrap,.wrap-narrow{padding:64px 20py}
   .stats-bar{flex-wrap:wrap;padding:28px 20px;gap:0}
   .stat-item{min-width:50%;padding:16px 20px;border-bottom:1px solid var(--bd-light)}
   .stat-item:nth-child(odd){border-right:1px solid var(--bd-light)}
@@ -282,7 +266,7 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
   .rev-grid{grid-template-columns:1fr}
   .offer-box{grid-template-columns:1fr}
   .offer-r{border-left:none;border-top:1px solid var(--bd-dark)}
-  .trust-bar{flex-direction:column;align-items:flex-start;gap:20px;padding:32px 20px}
+  .trust-bar{flex-direction:column;align-items:flex-start;gap:20px;padding:32px 20py}
   .trust-item{border-right:none;padding:0}
   .bottom-cta{padding:72px 20px}
   footer{padding:20px;flex-direction:column;text-align:center;padding-bottom:80px}
@@ -383,33 +367,6 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
   <div class="stat-item reveal"><div class="stat-num">50%</div><div class="stat-label">Early bird discount</div></div>
 </div>
 
-<!-- ══ PAIN POINTS (dark) — B改动#6 提前 ══════════════════════ -->
-<section class="s-dark">
-  <div class="wrap">
-    <span class="eyebrow reveal">Sound familiar?</span>
-    <h2 class="big reveal">This was made<br>for you if…</h2>
-    <p class="lead reveal">If you've been waking up stiff, exhausted, or defeated by every pillow you've tried — you're not alone.</p>
-    <div class="pain-grid">
-      <div class="pain-card reveal">
-        <span class="pain-icon">😩</span>
-        <div><strong>Stiff neck, twice a week or more</strong><p>You wake up in pain more than you wake up refreshed. Even after a full night's sleep.</p></div>
-      </div>
-      <div class="pain-card reveal">
-        <span class="pain-icon">💸</span>
-        <div><strong>Spent hundreds on pillows — nothing worked</strong><p>Memory foam, latex, contour, buckwheat. None of them understood how you actually sleep.</p></div>
-      </div>
-      <div class="pain-card reveal">
-        <span class="pain-icon">🥱</span>
-        <div><strong>7+ hours in bed, still exhausted</strong><p>You're getting the hours but not the recovery. Your pillow is keeping your spine misaligned all night.</p></div>
-      </div>
-      <div class="pain-card reveal">
-        <span class="pain-icon">🔄</span>
-        <div><strong>You shift positions constantly</strong><p>No static pillow can keep up. You need something that adjusts with you — automatically, all night.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ══ MODES 3 VIDEOS (light) ══════════════════════════════════ -->
 <section class="s-light" id="modes">
   <div class="wrap">
@@ -469,6 +426,34 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
     </div>
   </div>
 </section>
+
+<!-- ══ PAIN POINTS (dark) — B改动#6 提前 ══════════════════════ -->
+<section class="s-dark" style="border-top:1px solid rgba(255,255,255,.07)">
+  <div class="wrap">
+    <span class="eyebrow reveal">Sound familiar?</span>
+    <h2 class="big reveal">This was made<br>for you if…</h2>
+    <p class="lead reveal">If you've been waking up stiff, exhausted, or defeated by every pillow you've tried — you're not alone.</p>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <span class="pain-icon">😩</span>
+        <div><strong>Stiff neck, twice a week or more</strong><p>You wake up in pain more than you wake up refreshed. Even after a full night's sleep.</p></div>
+      </div>
+      <div class="pain-card reveal">
+        <span class="pain-icon">💸</span>
+        <div><strong>Spent hundreds on pillows — nothing worked</strong><p>Memory foam, latex, contour, buckwheat. None of them understood how you actually sleep.</p></div>
+      </div>
+      <div class="pain-card reveal">
+        <span class="pain-icon">🥱</span>
+        <div><strong>7+ hours in bed, still exhausted</strong><p>You're getting the hours but not the recovery. Your pillow is keeping your spine misaligned all night.</p></div>
+      </div>
+      <div class="pain-card reveal">
+        <span class="pain-icon">🔄</span>
+        <div><strong>You shift positions constantly</strong><p>No static pillow can keep up. You need something that adjusts with you — automatically, all night.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ══ PRODUCT IMAGE (light) ══════════════════════════════════ -->
 <section class="s-light">
@@ -530,42 +515,18 @@ footer{background:#0a0a0a;padding:24px 48px;display:flex;justify-content:space-b
   <div class="press-inner">
     <span class="press-eyebrow reveal">As seen in</span>
     <div class="press-logos">
-      <div class="press-logo reveal">
-        <span class="pl-text"><span class="pl-yahoo-icon">yahoo!</span><span class="pl-yahoo-news">news</span></span>
-      </div>
-      <div class="press-logo reveal">
-        <span class="pl-text pl-ap">AP<span class="ap-box">news</span></span>
-      </div>
-      <div class="press-logo reveal">
-        <span class="pl-text pl-mw">Market<span class="mw-watch">Watch</span></span>
-      </div>
-      <div class="press-logo reveal">
-        <span class="pl-time">TIME</span>
-      </div>
-      <div class="press-logo reveal">
-        <span class="pl-text pl-usnews"><span class="us-red">U.S.</span>News</span>
-      </div>
-      <div class="press-logo reveal">
-        <span class="pl-dn">DAILY NEWS</span>
-      </div>
-      <div class="press-logo reveal">
-        <span class="pl-text pl-forbes">Forbes</span>
-      </div>
-      <div class="press-logo reveal">
-        <span class="pl-text pl-tribune">Chicago Tribune</span>
-      </div>
-      <div class="press-logo reveal">
-        <span class="pl-text pl-denver">The Denver Post</span>
-      </div>
-      <div class="press-logo reveal">
-        <span class="pl-text pl-sfgate">SFGATE</span>
-      </div>
-      <div class="press-logo reveal">
-        <span class="pl-sky">sky <span class="sky-box">news</span></span>
-      </div>
-      <div class="press-logo reveal">
-        <span class="pl-text pl-cnet"><span class="cnet-pipe">|</span>CNET</span>
-      </div>
+      <div class="press-logo reveal"><img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Yahoo_news_logo.svg" alt="Yahoo News" loading="lazy"></div>
+      <div class="press-logo reveal"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Associated_Press_logo_2012.svg" alt="AP News" loading="lazy"></div>
+      <div class="press-logo reveal"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iNjAiPjxwYXRoIGQ9Ik0zMi41NiAyOC43NjhsLS4xNzIuODg4aC0uMDNjLS4yMy0uNTE2LS44ODgtMS4yMDMtMi4yOTItMS4yMDMtMi4yOTIgMC00LjYxMyAxLjc3Ni01LjEyOCA0LjU1NS0uNDU4IDIuNDM1Ljc0NSA0LjU4NCAzLjQzOCA0LjU4NCAxLjAwMyAwIDIuMTUtLjQgMi43MjItMS4yMzJoLjAzbC0uMTcyLjkxN2gyLjUybDEuNTc2LTguNTM4SDMyLjU2em0tLjgwMiA0LjI0Yy0uMTcyLjgzLS45NDUgMi4yMDYtMi41NSAyLjIwNi0xLjU0NyAwLTEuODYyLTEuMzc1LTEuNzItMi4xNS4xNzItLjk3NCAxLjA2LTIuMjA2IDIuNTItMi4yMDYgMS40MzMgMCAxLjkyIDEuMTQ2IDEuNzQ4IDIuMTV6bTQuNzU2LTQuMjRoMi4zNzhsLS4xNzIuODg4aC4wM2MuMzE1LS40Ljg4OC0xLjIwMyAyLjM3OC0xLjIwM2wtLjQ1OCAyLjU4Yy0xLjIwMy4wMy0yLjEuMjU4LTIuMjkyIDEuNTc2bC0uODg4IDQuN2gtMi42em02LjMzMi0zLjM1MmgyLjU4bC0xLjIwMyA2LjQ0NmguMDU3bDIuOTUtMy4wOTRoMy4wMDhsLTMuOTI1IDMuNzUzIDIuMjYzIDQuNzg1aC0yLjg5NEw0NC4wMiAzMy4xOEg0NGwtLjc3NCA0LjEyNmgtMi41NXptMTEuNSAzLjAzN2MtMi41OCAwLTQuOSAyLjIzNS01LjMzIDQuNjEzLS40NTggMi41MiAxLjIzMiA0LjUyNyAzLjY5NiA0LjUyN2E0Ljc2IDQuNzYgMCAwIDAgMi41OC0uNzc0Yy44MDItLjQ4NyAxLjU0Ny0xLjIzMiAyLjE1LTIuMTc3aC0yLjYwN2MtLjQzLjQ1OC0uOTE3LjgwMi0xLjcyLjgwMi0xLjAwMyAwLTEuNzItLjYwMi0xLjctMS42MDRoNi40Yy4wODYtLjIuMTE1LS4zNDQuMTcyLS42Ni40ODctMi42MzYtMS4wMy00LjcyNy0zLjY0LTQuNzI3em0tMi41OCAzLjY0Yy4yLS41MTYuODg4LTEuNDYgMi4yMzUtMS40NiAxLjMxOCAwIDEuNjYyLjk0NSAxLjY2MiAxLjQ2em0tMzAuNjA4IDUuMjEzaDIuNTV2LTExLjlIMjEuNTNsLTQuNTI3IDYuNzZoLS4wM3YtNi43NmgtMi4xNzdsLTcuOTkzIDExLjloMy4wOTRsNC40OTgtNi43NmguMDN2Ni43NmgyLjIwNmw0LjQ3LTYuNzZoLjA1N3ptNDMuMzItOC41MzhoLREuNjA0bC40NTgtMi41MmgtMi4yMzVsLS4xNzIuOTc0Yy0uMiAxLjExNy0uODg4IDEuNDYtMS44MzQgMS41NDdoLS4wM2wtLjQgMS45MmgxLjI2bC0xLjIzMiA2LjZoMi41NWwxLjIzMi02LjZoMS42MzN6Ii8+PHBhdGggZD0iTTEwNC4wMTQgMzQuMDdjLS44MyAxLjkwOC0yLjgzNiAzLjUyNC01LjEyOCAzLjUyNC0yLjU4IDAtNC4yMTItMi4wMzQtMy43MjUtNC41ODQuNDU4LTIuNTIgMi43OC00LjU1NSA1LjM1OC00LjU1NSAyLjI2MyAwIDMuOCAxLjUxOCAzLjg0IDMuNmgtMi41OGMtLjE3Mi0uNjAyLS41NDQtMS4yMDMtMS42MzMtMS4yMDMtMS4yMDMtLjA1Ny0yLjIwNi45NDUtMi40MzUgMi4xNS0uMjMgMS4yMzIuNCAyLjE3NyAxLjYzMyAyLjE3NyAxLjA2IDAgMS43LS42MDIgMi4wNjMtMS4xNDZoMi42MDd6bS0yMS4yLTExLjY5bC00Ljk1NiAzLjAzN2gxLjQwNGwtNC40OTggNi43NmgtLjA1N3YtNi43Nkg3Mi41TDY4IDMyLjE3OGgtLjAzdi02Ljc2aC0yLjU4djExLjloMi4yMzVsNC40OTgtNi43NmguMDN2Ni43NmgyLjIwNmw3Ljk2NS0xMS45aDEuMjZ6bTQuODcgMTQuOTI3aC0yLjUybC4xNzItLjkxN2gtLjAzYy0uNjAyLjgzLTEuNzIgMS4yMzItMi43MjIgMS4yMzItMi43MjIgMC0zLjg5Ni0yLjE1LTMuNDM4LTQuNTg0LjUxNi0yLjc4IDIuODY1LTQuNTU1IDUuMTI4LTQuNTU1IDEuNDA0IDAgMi4wNjMuNjg4IDIuMjkyIDEuMjAzaC4wM2wuMTcyLS44ODhoMi41MnptLTQuMjk4LTIuMDljMS41NzYgMCAyLjM3OC0xLjM3NSAyLjU1LTIuMjA2LjE3Mi0xLjAzLS4zMTUtMi4xNS0xLjc0OC0yLjE1LTEuNDYgMC0yLjM1IDEuMjMyLTIuNTIgMi4yMDYtLjE3Mi44MDIuMTcyIDIuMTUgMS43MiAyLjE1em0xMi4yOS02LjQ0NmgtMS42MDRsLjQ1OC0yLjUyaC0yLjIzNWwtLjE3Mi45NzRjLS4yIDEuMTE3LS44ODggMS40Ni0xLjgzNCAxLjU0N2gtLjAzbC0uMzcyIDEuOTJoMS4yNmwtMS4yMzIgNi42aDIuNTVsMS4yMzItNi42aDEuNjMzem0xMC43NDQtMy4zNTJoMi41NWwtLjc3NCA0LjI0aC4wM2MuNTQ0LS44MDIgMS4yOS0xLjIwMyAyLjQwNy0xLjIwMy44MDIgMCAxLjcyLjMxNSAyLjE1Ljk0NS41NDQuODMuNDg3IDEuNTc2LjIgMy4xMjNsLS44ODggNC4xNTZoLTIuNTVsLjg2LTQuNjRjLjA4Ni0uNC4zMTUtMS44MDUtMS4wMy0xLjgwNS0xLjQzMyAwLTEuNjYyIDEuMjktMS43NDggMS43MmwtLjg4OCA0LjcyN2gtMi41MiIgZmlsbD0iIzAwYjc0MiIvPjwvc3ZnPgo=" alt="MarketWatch" loading="lazy"></div>
+      <div class="press-logo reveal"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Time_Magazine_logo.svg" alt="TIME" loading="lazy"></div>
+      <div class="press-logo reveal"><img src="https://upload.wikimedia.org/wikipedia/commons/1/18/U.S._News_%26_World_Report_logo.svg" alt="U.S. News" loading="lazy"></div>
+      <div class="press-logo reveal"><img src="https://upload.wikimedia.org/wikipedia/commons/3/38/New_York_Daily_News.svg" alt="Daily News" loading="lazy"></div>
+      <div class="press-logo reveal"><img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Forbes_logo.svg" alt="Forbes" loading="lazy"></div>
+      <div class="press-logo reveal"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Chicago_Tribune_Logo.svg" alt="Chicago Tribune" loading="lazy"></div>
+      <div class="press-logo reveal"><img src="https://upload.wikimedia.org/wikipedia/commons/2/21/The_Denver_Post_logo.svg" alt="The Denver Post" loading="lazy"></div>
+      <div class="press-logo reveal"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Logo_of_SFGate.svg" alt="SFGATE" loading="lazy"></div>
+      <div class="press-logo reveal"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Sky_News_2026.svg" alt="Sky News" loading="lazy"></div>
+      <div class="press-logo reveal"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/CNET_%282022%29.svg" alt="CNET" loading="lazy"></div>
     </div>
     <div class="press-quotes">
       <div class="pq reveal">
