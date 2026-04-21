@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaguyasu — Precision Office Furniture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0d0c;
+    --ink-2: #1c1a18;
+    --brass: #b8955a;
+    --brass-light: #d4b27a;
+    --cream: #f5f2ed;
+    --cream-2: #ede9e2;
+    --muted: #7a7570;
+    --white: #fdfcfa;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── ANNOUNCEMENT BAR ── */
+  .announcement {
+    background: var(--ink);
+    color: var(--brass-light);
+    text-align: center;
+    padding: 10px 20px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .announcement a { color: var(--brass-light); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(253, 252, 250, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--cream-2);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.07); }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--brass); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 400;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--brass);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .nav-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    color: var(--ink);
+    transition: color 0.2s;
+  }
+  .nav-icon:hover { color: var(--brass); }
+
+  .nav-cart {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 400;
+  }
+  .cart-count {
+    background: var(--brass);
+    color: white;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 108px);
+    overflow: hidden;
+  }
+
+  .hero-text {
+    background: var(--ink-2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 80px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-text::before {
+    content: 'KAGUYASU';
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    font-family: var(--serif);
+    font-size: 180px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.03);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .hero-kicker {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-kicker::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--brass);
+  }
+
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--brass-light);
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(245,242,237,0.55);
+    max-width: 380px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--brass);
+    color: var(--ink);
+    padding: 14px 32px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    font-family: var(--sans);
+  }
+  .btn-primary:hover {
+    background: var(--brass-light);
+    transform: translateY(-1px);
+  }
+  .btn-primary svg { transition: transform 0.3s; }
+  .btn-primary:hover svg { transform: translateX(4px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(245,242,237,0.6);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 400;
+    border-bottom: 1px solid rgba(245,242,237,0.2);
+    padding-bottom: 2px;
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover { color: var(--white); border-color: var(--brass); }
+
+  .hero-image {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 8s ease;
+  }
+  .hero-image:hover img { transform: scale(1.03); }
+
+  .hero-image-badge {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    background: var(--white);
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 160px;
+  }
+  .badge-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .badge-value { font-family: var(--serif); font-size: 24px; font-weight: 400; color: var(--ink); }
+  .badge-sub { font-size: 11px; color: var(--muted); }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    background: var(--ink);
+    overflow: hidden;
+    padding: 14px 0;
+    display: flex;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 32px;
+    padding: 0 40px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brass);
+    font-weight: 400;
+  }
+  .marquee-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--brass);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── CATEGORIES ── */
+  .section { padding: 100px 48px; }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .section-title em { font-style: italic; color: var(--brass); }
+  .section-link {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--cream-2);
+    padding-bottom: 2px;
+    transition: all 0.3s;
+  }
+  .section-link:hover { color: var(--brass); border-color: var(--brass); }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 320px 320px;
+    gap: 12px;
+  }
+
+  .cat-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--cream);
+    text-decoration: none;
+    display: block;
+  }
+  .cat-card:first-child { grid-row: span 2; }
+
+  .cat-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .cat-card:hover .cat-img { transform: scale(1.06); }
+
+  .cat-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(14,13,12,0.75) 0%, rgba(14,13,12,0.1) 50%, transparent 100%);
+    transition: background 0.4s;
+  }
+  .cat-card:hover .cat-overlay {
+    background: linear-gradient(to top, rgba(14,13,12,0.85) 0%, rgba(14,13,12,0.2) 60%, transparent 100%);
+  }
+
+  .cat-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 28px 28px 24px;
+    transform: translateY(0);
+    transition: transform 0.4s;
+  }
+
+  .cat-name {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--white);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .cat-card:first-child .cat-name { font-size: 38px; }
+
+  .cat-count {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,242,237,0.55);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cat-count::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--brass);
+  }
+
+  .cat-arrow {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(245,242,237,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    transform: scale(0.8) rotate(-45deg);
+    opacity: 0;
+    transition: all 0.4s;
+  }
+  .cat-card:hover .cat-arrow { opacity: 1; transform: scale(1) rotate(0); }
+
+  /* ── FEATURES STRIP ── */
+  .features {
+    background: var(--cream);
+    padding: 60px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: var(--cream-2);
+  }
+  .feature-item {
+    background: var(--cream);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--brass);
+  }
+  .feature-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .feature-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* ── PRODUCT SPOTLIGHT ── */
+  .spotlight {
+    background: var(--ink-2);
+    padding: 100px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .spotlight-image {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+  .spotlight-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .spotlight-image-accent {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    width: 200px;
+    height: 200px;
+    border: 1px solid rgba(184,149,90,0.2);
+    pointer-events: none;
+  }
+
+  .spotlight-text {}
+  .spotlight-kicker { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); margin-bottom: 20px; }
+  .spotlight-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 3.5vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+  .spotlight-desc { font-size: 14px; color: rgba(245,242,237,0.55); line-height: 1.8; margin-bottom: 40px; }
+
+  .spotlight-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.05);
+    margin-bottom: 40px;
+  }
+  .stat-item {
+    background: rgba(255,255,255,0.03);
+    padding: 20px;
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--brass-light);
+    display: block;
+  }
+  .stat-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,242,237,0.4); }
+
+  /* ── PRODUCTS GRID ── */
+  .products-section { padding: 100px 48px; background: var(--white); }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .product-card {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .product-img-wrap {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--cream);
+    margin-bottom: 16px;
+  }
+  .product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .product-card:hover .product-img-wrap img { transform: scale(1.05); }
+  .product-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: var(--brass);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+  .product-badge.stock { background: var(--ink); color: var(--cream); }
+  .product-quickadd {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    background: var(--white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s;
+    color: var(--ink);
+  }
+  .product-card:hover .product-quickadd { opacity: 1; transform: translateY(0); }
+  .product-quickadd:hover { background: var(--brass); color: var(--white); }
+
+  .product-name {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .product-cat { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .product-price { font-size: 16px; font-weight: 400; color: var(--ink); }
+  .product-price s { color: var(--muted); font-size: 13px; margin-right: 6px; }
+
+  /* ── EDITORIAL ABOUT ── */
+  .about-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+  }
+  .about-image {
+    position: relative;
+    overflow: hidden;
+  }
+  .about-image img { width: 100%; height: 100%; object-fit: cover; }
+  .about-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(14,13,12,0.2), transparent);
+  }
+
+  .about-text {
+    background: var(--cream);
+    padding: 80px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+  .about-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); }
+  .about-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 3vw, 46px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .about-body { font-size: 14px; color: var(--muted); line-height: 1.85; max-width: 420px; }
+  .about-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--brass);
+  }
+
+  .about-numbers {
+    display: flex;
+    gap: 40px;
+    padding-top: 8px;
+  }
+  .about-num {}
+  .about-num-val {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--ink);
+    display: block;
+  }
+  .about-num-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+  /* ── TESTIMONIAL ── */
+  .testimonial-section {
+    background: var(--ink);
+    padding: 100px 48px;
+    text-align: center;
+  }
+  .testimonial-quote {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white);
+    max-width: 800px;
+    margin: 0 auto 32px;
+    line-height: 1.4;
+  }
+  .testimonial-author {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+  .testimonial-author span { color: rgba(245,242,237,0.4); margin: 0 8px; }
+
+  .testimonial-stars {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 24px;
+  }
+  .star { width: 16px; height: 16px; color: var(--brass); }
+
+  /* ── EMAIL CAPTURE ── */
+  .newsletter {
+    background: var(--cream);
+    padding: 80px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+  }
+  .newsletter-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 300;
+    color: var(--ink);
+  }
+  .newsletter-sub { font-size: 14px; color: var(--muted); }
+  .newsletter-form {
+    display: flex;
+    gap: 0;
+    max-width: 480px;
+    width: 100%;
+  }
+  .newsletter-input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1px solid var(--cream-2);
+    border-right: none;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--white);
+    outline: none;
+  }
+  .newsletter-input:focus { border-color: var(--brass); }
+  .newsletter-submit {
+    padding: 14px 28px;
+    background: var(--ink);
+    color: var(--white);
+    border: none;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .newsletter-submit:hover { background: var(--brass); color: var(--ink); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink-2);
+    padding: 80px 48px 40px;
+    color: rgba(245,242,237,0.5);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-brand {}
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .footer-logo span { color: var(--brass); }
+  .footer-tagline { font-size: 13px; line-height: 1.7; margin-bottom: 24px; }
+  .footer-socials {
+    display: flex;
+    gap: 12px;
+  }
+  .social-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(245,242,237,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,242,237,0.5);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .social-btn:hover { border-color: var(--brass); color: var(--brass); }
+
+  .footer-col-title {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(245,242,237,0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--brass-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(245,242,237,0.08);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-up:nth-child(2) { transition-delay: 0.1s; }
+  .fade-up:nth-child(3) { transition-delay: 0.2s; }
+  .fade-up:nth-child(4) { transition-delay: 0.3s; }
+  .fade-up:nth-child(5) { transition-delay: 0.4s; }
+  .fade-up:nth-child(6) { transition-delay: 0.5s; }
+
+  /* ── MOBILE NAV TOGGLE ── */
+  .nav-hamburger { display: none; cursor: pointer; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement">
+  Free shipping on orders over $1,500 · US Showroom in Irvine, CA (By Appointment) ·
+  <a href="#">In-Stock: Up to 30% Off →</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">K<span>·</span>AGUYASU</a>
+  <ul class="nav-links">
+    <li><a href="#">Reception Desks</a></li>
+    <li><a href="#">Executive Desks</a></li>
+    <li><a href="#">Conference Tables</a></li>
+    <li><a href="#">Office Desks</a></li>
+    <li><a href="#">Chairs</a></li>
+    <li><a href="#">In Stock</a></li>
+  </ul>
+  <div class="nav-actions">
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <a href="#" class="nav-cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <span class="cart-count">0</span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-kicker">New Arrivals 2025</div>
+    <h1 class="hero-headline">
+      Designed for<br>
+      <em>Leaders Who</em><br>
+      Demand More
+    </h1>
+    <p class="hero-sub">
+      Premium office furniture engineered for the modern executive — 
+      where craftsmanship meets command.
+    </p>
+    <div class="hero-ctas">
+      <a href="#" class="btn-primary">
+        Shop Executive Desks
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="#" class="btn-ghost">View Lookbook</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1593642532744-d377ab507dc8?w=1200&q=80"
+         alt="Premium executive office with Kaguyasu furniture"
+         onerror="this.src='https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80'">
+    <div class="hero-image-badge">
+      <span class="badge-label">In Stock Now</span>
+      <span class="badge-value">2,500+</span>
+      <span class="badge-sub">Products Available</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Executive Desks <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Reception Stations <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Conference Tables <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Ergonomic Chairs <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Storage Solutions <span class="marquee-dot"></span></span>
+    <span class="marquee-item">OEM / ODM Available <span class="marquee-dot"></span></span>
+    <span class="marquee-item">US Warehouse Ships Today <span class="marquee-dot"></span></span>
+    <span class="marquee-item">10+ Countries Served <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Executive Desks <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Reception Stations <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Conference Tables <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Ergonomic Chairs <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Storage Solutions <span class="marquee-dot"></span></span>
+    <span class="marquee-item">OEM / ODM Available <span class="marquee-dot"></span></span>
+    <span class="marquee-item">US Warehouse Ships Today <span class="marquee-dot"></span></span>
+    <span class="marquee-item">10+ Countries Served <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Explore the Collection</div>
+      <h2 class="section-title">Shop by <em>Category</em></h2>
+    </div>
+    <a href="#" class="section-link">
+      All Products
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+  <div class="cat-grid">
+    <a href="#" class="cat-card fade-up">
+      <img class="cat-img"
+           src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=80"
+           alt="Executive Desks"
+           onerror="this.src='https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=900&q=80'">
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <span class="cat-name">Executive Desks</span>
+        <span class="cat-count">48 Products</span>
+      </div>
+      <div class="cat-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+    <a href="#" class="cat-card fade-up">
+      <img class="cat-img"
+           src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80"
+           alt="Reception Desks"
+           onerror="this.src='https://images.unsplash.com/photo-1593642532744-d377ab507dc8?w=600&q=80'">
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <span class="cat-name">Reception Desks</span>
+        <span class="cat-count">36 Products</span>
+      </div>
+      <div class="cat-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+    <a href="#" class="cat-card fade-up">
+      <img class="cat-img"
+           src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=600&q=80"
+           alt="Conference Tables"
+           onerror="this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80'">
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <span class="cat-name">Conference Tables</span>
+        <span class="cat-count">24 Products</span>
+      </div>
+      <div class="cat-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+    <a href="#" class="cat-card fade-up">
+      <img class="cat-img"
+           src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=80"
+           alt="Chairs"
+           onerror="this.src='https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=600&q=80'">
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <span class="cat-name">Chairs</span>
+        <span class="cat-count">52 Products</span>
+      </div>
+      <div class="cat-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+    <a href="#" class="cat-card fade-up">
+      <img class="cat-img"
+           src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80"
+           alt="Storage"
+           onerror="this.src='https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80'">
+      <div class="cat-overlay"></div>
+      <div class="cat-info">
+        <span class="cat-name">Storage</span>
+        <span class="cat-count">40 Products</span>
+      </div>
+      <div class="cat-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="features">
+  <div class="feature-item fade-up">
+    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    </svg>
+    <div class="feature-title">Global Reach</div>
+    <div class="feature-desc">Warehouses in the US, Japan & Australia. Ships to 10+ countries with local expertise.</div>
+  </div>
+  <div class="feature-item fade-up">
+    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+    </svg>
+    <div class="feature-title">Flexible Delivery</div>
+    <div class="feature-desc">Home delivery via FedEx/UPS, white-glove service, or local warehouse pickup.</div>
+  </div>
+  <div class="feature-item fade-up">
+    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    </svg>
+    <div class="feature-title">Package Guarantee</div>
+    <div class="feature-desc">Every order insured and tracked. Arrives intact or we make it right, no questions asked.</div>
+  </div>
+  <div class="feature-item fade-up">
+    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+    </svg>
+    <div class="feature-title">Safe Payment</div>
+    <div class="feature-desc">All major cards, financing available, and enterprise net-30 terms for qualified buyers.</div>
+  </div>
+</div>
+
+<!-- SPOTLIGHT -->
+<section class="spotlight">
+  <div class="spotlight-image fade-up">
+    <img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80"
+         alt="Featured executive desk"
+         onerror="this.src='https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80'">
+    <div class="spotlight-image-accent"></div>
+  </div>
+  <div class="spotlight-text fade-up">
+    <div class="spotlight-kicker">Editor's Choice</div>
+    <h2 class="spotlight-title">The LBZ Series<br>Executive Desk</h2>
+    <p class="spotlight-desc">
+      Handcrafted from E1-grade eco-certified panels with precision-engineered cable management, 
+      integrated power outlets, and a signature soft-LED ambient system. Built for those who lead.
+    </p>
+    <div class="spotlight-stats">
+      <div class="stat-item">
+        <span class="stat-num">E1</span>
+        <span class="stat-label">Eco-Grade Panels</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5yr</span>
+        <span class="stat-label">Structural Warranty</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2cm</span>
+        <span class="stat-label">Solid Tabletop</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">45+</span>
+        <span class="stat-label">Days Lead Time</span>
+      </div>
+    </div>
+    <a href="#" class="btn-primary">
+      View Collection
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Fresh Arrivals</div>
+      <h2 class="section-title">Best <em>Sellers</em></h2>
+    </div>
+    <a href="#" class="section-link">
+      View All
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+  <div class="products-grid">
+    <a href="#" class="product-card fade-up">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80" alt="L-Shaped Executive Desk"
+             onerror="this.src='https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=600&q=80'">
+        <span class="product-badge">New</span>
+        <button class="product-quickadd">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="product-name">L-Shaped Executive Desk with Privacy Panel</div>
+      <div class="product-meta">
+        <span class="product-cat">Executive Desks</span>
+        <span class="product-price"><s>$2,200</s>$1,760</span>
+      </div>
+    </a>
+    <a href="#" class="product-card fade-up">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Modern Reception Desk"
+             onerror="this.src='https://images.unsplash.com/photo-1593642532744-d377ab507dc8?w=600&q=80'">
+        <span class="product-badge stock">In Stock</span>
+        <button class="product-quickadd">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="product-name">Curved LED Reception Counter — White Oak</div>
+      <div class="product-meta">
+        <span class="product-cat">Reception Desks</span>
+        <span class="product-price">$3,450</span>
+      </div>
+    </a>
+    <a href="#" class="product-card fade-up">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" alt="Oval Conference Table"
+             onerror="this.src='https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=600&q=80'">
+        <button class="product-quickadd">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+        </button>
+      </div>
+      <div class="product-name">12-Person Oval Conference Table — Walnut</div>
+      <div class="product-meta">
+        <span class="product-cat">Conference Tables</span>
+        <span class="product-price">$4,200</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT / EDITORIAL -->
+<section class="about-section">
+  <div class="about-image">
+    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=900&q=80"
+         alt="Kaguyasu office showroom"
+         onerror="this.src='https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?w=900&q=80'">
+    <div class="about-image-overlay"></div>
+  </div>
+  <div class="about-text">
+    <div class="about-label">Our Story</div>
+    <h2 class="about-title">Built for the Way<br>Leaders Work Today</h2>
+    <div class="about-divider"></div>
+    <p class="about-body">
+      Kaguyasu was founded on a single insight: the gap between beautiful office furniture 
+      and affordable office furniture shouldn't exist. We work directly with artisan manufacturers 
+      to bring world-class designs to forward-thinking businesses — without the showroom markup.
+    </p>
+    <div class="about-numbers">
+      <div class="about-num">
+        <span class="about-num-val">10+</span>
+        <span class="about-num-label">Countries</span>
+      </div>
+      <div class="about-num">
+        <span class="about-num-val">2,500</span>
+        <span class="about-num-label">Products</span>
+      </div>
+      <div class="about-num">
+        <span class="about-num-val">3yr</span>
+        <span class="about-num-label">Established</span>
+      </div>
+    </div>
+    <a href="#" class="btn-primary" style="align-self: flex-start; margin-top: 12px; background: var(--ink); color: var(--white);">
+      Our Philosophy
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial-section">
+  <div class="testimonial-stars">
+    <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+  </div>
+  <blockquote class="testimonial-quote">
+    "The quality is exceptional — it's real wood, solid, beautiful. The color matches 
+    perfectly and I get compliments on it all the time."
+  </blockquote>
+  <div class="testimonial-author">
+    Verified Buyer <span>·</span> Executive Desk Collection <span>·</span> Los Angeles, CA
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="section-label">Stay in the Know</div>
+  <h2 class="newsletter-title">Design Ideas & Early Access</h2>
+  <p class="newsletter-sub">Join 12,000+ interior designers and business owners who get our monthly lookbook.</p>
+  <form class="newsletter-form" onsubmit="return false;">
+    <input class="newsletter-input" type="email" placeholder="your@email.com">
+    <button class="newsletter-submit" type="submit">Subscribe</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="footer-logo">K<span>·</span>AGUYASU</span>
+      <p class="footer-tagline">
+        Premium office furniture for modern workspaces. Designed for leaders, 
+        built to last, delivered directly to you.
+      </p>
+      <div class="footer-socials">
+        <div class="social-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </div>
+        <div class="social-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </div>
+        <div class="social-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Products</div>
+      <ul class="footer-links">
+        <li><a href="#">Executive Desks</a></li>
+        <li><a href="#">Reception Desks</a></li>
+        <li><a href="#">Conference Tables</a></li>
+        <li><a href="#">Office Desks</a></li>
+        <li><a href="#">Chairs & Seating</a></li>
+        <li><a href="#">Storage Solutions</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Bulk & Wholesale</a></li>
+        <li><a href="#">OEM / ODM</a></li>
+        <li><a href="#">Assembly Service</a></li>
+        <li><a href="#">Office Design Quiz</a></li>
+        <li><a href="#">Financing Options</a></li>
+        <li><a href="#">Trade Program</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Kaguyasu</a></li>
+        <li><a href="#">US Showroom</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Kaguyasu Inc. All rights reserved.</span>
+    <span>US Showroom: Irvine, CA 92618 (By Appointment) · support@kaguyasu.com</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll shadow
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Intersection Observer for fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Cart hover
+  document.querySelector('.nav-cart').addEventListener('click', function(e) {
+    e.preventDefault();
+    this.querySelector('.cart-count').style.background = '#b8955a';
+    setTimeout(() => this.querySelector('.cart-count').style.background = '#b8955a', 200);
+  });
+
+  // Newsletter
+  document.querySelector('.newsletter-form').addEventListener('submit', function() {
+    const btn = this.querySelector('.newsletter-submit');
+    btn.textContent = 'Subscribed ✓';
+    btn.style.background = '#3B6D11';
+    btn.style.color = 'white';
+  });
+</script>
+</body>
+</html>
